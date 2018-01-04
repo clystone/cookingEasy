@@ -1,0 +1,66 @@
+<div class="exchangeDetailTop bgcWhite">
+  <img ng-src="http://www.cookingeasy.cn/images/good/{{parms.integralGood.id}}/logo.jpg" onerror="this.src='images/default.png'" alt="" class="exchangeTopPic">
+</div>
+<div class="exchangeDetailMid bgcWhite m10">
+  <p class="fw700 fs16 color50 pt10">{{parms.integralGood.name}}</p>
+  <div class="mt10">
+    <span class="exchangeDesLeft">兑换价格</span>
+    <p class="exchangeDesRight"><span class="colorOrange">￥{{parms.integralGood.price / 100}}+{{parms.integralGood.integral}}积分</span><span class="color128 pl10 ts">￥{{parms.integralGood.retailPrice / 100}}</span></p>
+  </div>
+  <div class="mt5">
+    <span class="exchangeDesLeft">配送地址</span>
+    <p class="exchangeDesRight"><span class="">{{parms.order.province}}{{parms.order.city}}{{parms.order.district}}{{parms.order.addr}}</span></p>
+  </div>
+  <div class="mt5">
+    <span class="exchangeDesLeft">订单状态</span>
+    <p class="exchangeDesRight"><span class="colorOrange" ng-show="parms.order.state == 2">已支付</span></p>
+    <p class="exchangeDesRight"><span class="colorOrange" ng-show="parms.order.state == 3">已完成</span></p>
+    <p class="exchangeDesRight"><span class="colorOrange" ng-show="parms.order.state == 6">已发货</span></p>
+  </div>
+  <div class="mt5">
+    <span class="exchangeDesLeft">订单编号</span>
+    <p class="exchangeDesRight"><span class="">{{parms.order.orderNo}}</span></p>
+  </div>
+</div>
+<div class="weui-tab mt10">
+  <div class="weui-navbar">
+    <div class="weui-navbar__item weui-bar__item_on1 toPage1">
+      商品简介
+    </div>
+    <div class="weui-navbar__item toPage2">
+      兑换流程
+    </div>
+    <div class="weui-navbar__item toPage3">
+      注意事项
+    </div>
+  </div>
+  <div class="weui-tab__panel bgcWhite">
+    <div class="page1 mt10">
+      <div>
+        <img ng-src="http://www.cookingeasy.cn/images/good/{{parms.integralGood.id}}/presentation.jpg" onerror="this.src='images/default.png'" alt="" class="panelPic">
+      </div>
+      <!--<div>-->
+        <!--<img src="images/replace.png" alt="" class="panelPic">-->
+      <!--</div>-->
+      <!--<div>-->
+        <!--<img src="images/replace.png" alt="" class="panelPic">-->
+      <!--</div>-->
+    </div>
+    <div class="page2 fs13 color50 mt10" style="display:none">
+      <p class="pl10 pr10">1、用户确认符合活动条件后，点击[马上兑换]，并填写配送信息。</p>
+      <p class="pl10 pr10">2、确认信息无误，提交兑换。</p>
+    </div>
+    <div class="page3 fs13 color50 mt10" style="display:none">
+      <p class="pl10 pr10">1、配送区域：仅限中国大陆地区(港澳台、西藏、新疆等地除外)</p>
+      <p class="pl10 pr10">2、每位用户仅可兑换一次。</p>
+      <p class="pl10 pr10">3、易德菜将在5个工作日内邮寄奖品。</p>
+      <p class="pl10 pr10">4、请提供正确并可正常通信的手机号，提供错误信息导致损失将由用户承担。</p>
+      <p class="pl10 pr10">5、产品邮费由易德菜承担。</p>
+      <p class="pl10 pr10">6、商品兑换后无法退货、退款等。</p>
+    </div>
+  </div>
+</div>
+
+<div class="fixBot" ng-show="parms.order.state == 6">
+  <button class="weui-btn fixBtn" ng-click="confirmGood()">确认收货</button>
+</div>

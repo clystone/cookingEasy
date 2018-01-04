@@ -1,0 +1,47 @@
+<div>
+  <p class="pl5 color50 bindCardTit">请绑定持卡人本人的农业银行卡</p>
+</div>
+<div class="bgcWhite">
+  <div class="weui-cell bb bt">
+    <div class="weui-cell__hd">
+      <label class="weui-label">持卡人</label>
+    </div>
+    <div class="weui-cell__bt">
+      <input class="weui-input" type="text" placeholder="请输入持卡人姓名" ng-model="realName">
+    </div>
+    <div class="weui-cell__ft">
+      <i class="weui-icon-info colorGreen"></i>
+    </div>
+  </div>
+  <div class="weui-cell bb bt">
+    <div class="weui-cell__hd">
+      <label class="weui-label">卡类型</label>
+    </div>
+    <div class="weui-cell__bt">
+      <span>中国农业银行</span>
+    </div>
+  </div>
+  <div class="weui-cell bb bt">
+    <div class="weui-cell__hd">
+      <label class="weui-label">卡号</label>
+    </div>
+    <div class="weui-cell__bt">
+      <input class="weui-input" type="text" placeholder="无需网银/免手续费" ng-model="num">
+    </div>
+  </div>
+  <div class="weui-cell bb bt">
+    <div class="weui-cell__hd">
+      <label class="weui-label">手机号</label>
+    </div>
+    <div class="weui-cell__bt">
+      <input class="weui-input" type="text" placeholder="请输入银行预留的手机号码" ng-model="phone">
+    </div>
+  </div>
+</div>
+<label for="weuiAgree" class="weui-agree" style="display: inline">
+  <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+  <span class="weui-agree__text">同意</span>
+</label>
+<span class="weui-agree__text fs13" ui-sref="rule">《用户条款》</span>
+
+<button class="weui-btn bottomBtn" ng-click="toVerify()">下一步</button>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>确认付款</title>
+  <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/ensurePay.css">
+</head>
+<body ng-controller="ensurePayCtr">
+<div class="ensurePayHead tac">
+  <div class="tac pt30">
+    <img src="images/default.png" alt="" class="headPic vermid" ng-show="!parms.shop.headImgUrl">
+    <img src="{{parms.shop.headImgUrl}}" alt="" class="headPic vermid" ng-show="parms.shop.headImgUrl">
+    <span class="vermid" ng-bind="parms.shop.username"></span>
+  </div>
+  <p class="color128 pt10">确认付款</p>
+  <p class="fs36" ng-bind="parms.order.price/100 | currency:'￥':2"></p>
+</div>
+<div class="ensurePayMain">
+  <div class="fs12 color128 pb10 pl10">付款方式：</div>
+  <div class="weui-cells weui-cells_radio" style="margin-top: 0;">
+    <label class="weui-cell weui-check__label" for="x11">
+      <div class="weui-cell__bd">
+        <p>微信支付<span class="pl10 fs12 colorOrange">可获取50%积分</span></p>
+      </div>
+      <div class="weui-cell__ft">
+        <input type="radio" class="weui-check" name="radio1" id="x11">
+        <span class="weui-icon-checked"></span>
+      </div>
+    </label>
+    <label class="weui-cell weui-check__label" for="x12">
+
+      <div class="weui-cell__bd">
+        <p>农行支付<span class="pl10 fs12 colorOrange">可获取100%积分</span></p>
+      </div>
+      <div class="weui-cell__ft">
+        <input type="radio" name="radio1" class="weui-check" id="x12" checked="checked">
+        <span class="weui-icon-checked"></span>
+      </div>
+    </label>
+  </div>
+  <div class="weui-cell bb" ng-click="toCard()">
+    <div class="weui-cell__bd">
+      <img src="images/card1.png" alt="" class="mainIcon">
+      <span class="pl10 vermid">绑定银行卡付款</span>
+    </div>
+    <div class="weui-cell__ft">
+      <img src="images/down.png" alt="" class="rightArrow">
+    </div>
+  </div>
+</div>
+<button class="weui-btn ensurePayBtn" ng-click="payNow()">立即支付</button>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script src="https://cdn.bootcss.com/angular.js/1.5.5/angular.js"></script>
+<script src="https://cdn.bootcss.com/angular-ui-router/1.0.3/angular-ui-router.js"></script>
+<script src="https://res.wx.qq.com/open/libs/weuijs/1.1.2/weui.js"></script>
+<script>
+  (function () {
+    'use strict';
+//    $.toast.prototype.defaults.duration = 1000;
+    // const url = 'http://192.168.2.103:8081';
+    const url = 'http://www.cookingeasy.cn';
+    var myApp = angular.module("myApp", ['ui.router']);
+    myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+//    $urlRouterProvider.otherwise('/');
+      $httpProvider.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+//    $stateProvider
+//      .state("loadMore", {
+//        url: "/",
+//        templateUrl: "loadMore.html",
+//        controller: 'loadMoreCtr'
+//      })
+    });
+
+    myApp.controller('ensurePayCtr', ['$scope', 'locals', '$state', '$http', '$window', '$timeout', '$stateParams', function ($scope, locals, $state, $http, $timeout, $stateParams, $window) {
+      document.body.style.backgroundColor = '#ffffff';
+      let token = locals.get("token");
+      let params = $stateParams;
+
+      $scope.newOrderId = locals.get("newOrderId");
+
+      $http.get(url + '/api/order/find/' + $scope.newOrderId, {headers: {"TOKEN": token}})
+        .then(res => {
+          console.log(res.data);
+          $scope.parms = res.data.parms;
+        });
+
+      $scope.payNow = () => {
+        console.log($("#x12").is(':checked'));
+        console.log($("#x11").is(':checked'));
+        if ($("#x12").is(':checked')) {
+          console.log('农行支付');
+          $http.post(url + '/api/abc/pay/' + $scope.newOrderId, {}, {headers: {"TOKEN": token}})
+            .then(res => {
+              console.log(res.data);
+              return res.data
+            })
+            .then(res => {
+              console.log(res.parms.url);
+              window.location.href = res.parms.url
+            });
+        }
+        else if ($("#x11").is(':checked')) {
+          console.log('微信支付');
+          $http.post(url + '/api/pay/wxPayP/' + $scope.newOrderId, {}, {headers: {"TOKEN": token}})
+            .then(res => {
+              console.log(res.data);
+              $scope.pay = res.data.parms;
+
+              WeixinJSBridge.invoke(
+                'getBrandWCPayRequest', {
+                  "appId": $scope.pay.appId,     //公众号名称，由商户传入
+                  "timeStamp": $scope.pay.timeStamp,         //时间戳，自1970年以来的秒数
+                  "nonceStr": $scope.pay.nonceStr, //随机串
+                  "package": $scope.pay.package,
+                  "signType": $scope.pay.signType,         //微信签名方式：
+                  "paySign": $scope.pay.paySign //微信签名
+                },
+                function (res) {
+                  console.log(res);
+//                  alert(res.err_msg);
+                  if (res.err_msg == "get_brand_wcpay_request:ok") {
+                    window.location.href = 'http://www.cookingeasy.cn/user/index.html#/main'
+                  }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+                  else{
+                    alert("支付失败")
+                  }
+                }
+              );
+
+            });
+
+        }
+        // $state.go("exchangeSuccess")
+      };
+
+      $scope.toCard = ()=>{
+        window.location.href = 'http://www.cookingeasy.cn/user/index.html#/card'
+      }
+
+      // $scope.payNow = () => {
+      //   $state.go("paySuccess")
+      // }
+    }]);
+
+    myApp.factory('locals', ['$window', function ($window) {
+      return {        //存储单个属性
+        set: function (key, value) {
+          $window.localStorage[key] = value;
+        },        //读取单个属性
+        get: function (key, defaultValue) {
+          return $window.localStorage[key] || defaultValue;
+        },        //存储对象，以JSON格式存储
+        setObject: function (key, value) {
+          $window.localStorage[key] = JSON.stringify(value);//将对象以字符串保存
+        },        //读取对象
+        getObject: function (key) {
+          return JSON.parse($window.localStorage[key] || '{}');//获取字符串并解析成对象
+        }
+
+      }
+    }]);
+  }());
+
+
+</script>
+</html>

@@ -1,0 +1,40 @@
+.paySuccessHead{
+    padding-top: 20px;
+}
+
+.paySuccessIcon{
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.greenIcon{
+    margin-right: 3px;
+    font-size: 12px;
+    display: inline-block;
+    padding: 0 3px;
+    border: 1px solid rgb(24,186,101);
+    border-radius: 10px;
+    color: rgb(24,186,101);
+}
+
+.rightArrow{
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    transform:rotate(-90deg);
+    -ms-transform:rotate(-90deg); 	/* IE 9 */
+    -moz-transform:rotate(-90deg); 	/* Firefox */
+    -webkit-transform:rotate(-90deg); /* Safari 和 Chrome */
+    -o-transform:rotate(-90deg);
+}
+
+button.ensurePayBtn{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 20px;
+    background-color: rgb(24,186,101);
+    color: #ffffff;
+    font-size: 16px;
+}

@@ -1,0 +1,100 @@
+.bgcGreen{
+    background-color: rgb(24,186,101);
+}
+
+.iconPic{
+    display: inline-block;
+    width: 27px;
+    height: 27px;
+}
+
+.maintop{
+    padding-bottom: 20px;
+    border-bottom:1px solid #eee;
+}
+
+.leftPic{
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+}
+
+.downPic{
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+}
+
+.nearby{
+    height: 40px;
+    line-height: 40px;
+}
+
+.shopList{
+    padding-left: 15px;
+    border-top: 1px solid #eee;
+}
+
+.selfSupport{
+    color: rgb(24,186,101);
+    font-size: 12px;
+    display: inline-block;
+    padding: 1px 1px;
+    border: 1px solid rgb(24,186,101);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.shopName{
+    font-weight:700;
+}
+
+.shopList img{
+    position: absolute;
+    margin-top: 10px;
+    width: 80px;
+    height: 60px;
+}
+
+.shopDes{
+    margin-left: 90px;
+    padding-top: 10px;
+}
+
+.shopDistance{
+    padding-top: 5px;
+    font-size: 12px;
+    color: #aaa;
+}
+
+.shopDiscount{
+    padding-top: 5px;
+    font-size: 12px;
+    color: rgb(255,141,26);
+    padding-bottom: 5px;
+}
+
+.shoppingCartBox{
+    width: 55px;
+    height: 55px;
+    background-color: white;
+    position: fixed;
+    right: 20px;
+    bottom: 30px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.shoppingCartBox img{
+    width: 55px;
+    height: 55px;
+}
+
+.colorB{
+    color: #000;
+}
+
+
+

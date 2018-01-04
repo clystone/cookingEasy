@@ -1,0 +1,31 @@
+.payPic{
+    width: 70px;
+    height: 70px;
+}
+
+.payDetail{
+    height: 180px;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: rgb(231,250,241);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.payRemark{
+    text-indent: 10px;
+    background-color: rgb(231,250,241);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+button.w90p{
+    width: 90%;
+}
+
+textarea:-ms-input-placeholder{text-align: center;}
+textarea::-ms-input-placeholder{text-align: center;}
+textarea::-webkit-input-placeholder{text-align: center;}

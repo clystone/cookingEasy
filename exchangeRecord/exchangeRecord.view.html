@@ -1,0 +1,53 @@
+<div class="exchangeRecordTop pl10 color50 bb">
+  商品兑换记录
+</div>
+<div infinite-scroll="loadMore()" infinite-scroll-immediate-check='false' infinite-scroll-disabled='stop'>
+  <div class="streamBox" ui-sref="exchangeDetail({id:order.id})" ng-repeat="order in orders" ng-show="order.state != 4">
+    <img ng-src="http://www.cookingeasy.cn/images/good/{{order.integralGood.id}}/logo.jpg" onerror="this.src='images/default.png'"  alt="" class="streamPic">
+    <div class="streamDes">
+      <div class="desLeft">
+        <p class="fs14">{{order.integralGood.name}}</p>
+        <p class="color128 fs14 colorGreen">￥{{order.price/100}}+<span class="exchangeBlock">{{order.inefral}}积分</span></p>
+      </div>
+      <div class="desRight fs14 mr10">
+        <p class="color50 mt10">{{order.createTime | date:'MM-dd'}}</p>
+      </div>
+    </div>
+  </div>
+  <!--<div class="streamBox">-->
+    <!--<img src="images/pic1.jpg" alt="" class="streamPic">-->
+    <!--<div class="streamDes">-->
+      <!--<div class="desLeft">-->
+        <!--<p class="fs14">烧烤炉CR-03</p>-->
+        <!--<p class="color128 fs14 colorGreen">￥70+<span class="exchangeBlock">30积分</span></p>-->
+      <!--</div>-->
+      <!--<div class="desRight fs14 mr10">-->
+        <!--<p class="color50">12-01</p>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="streamBox">-->
+    <!--<img src="images/pic1.jpg" alt="" class="streamPic">-->
+    <!--<div class="streamDes">-->
+      <!--<div class="desLeft">-->
+        <!--<p class="fs14">烧烤炉CR-03</p>-->
+        <!--<p class="color128 fs14 colorGreen">￥70+<span class="exchangeBlock">30积分</span></p>-->
+      <!--</div>-->
+      <!--<div class="desRight fs14 mr10">-->
+        <!--<p class="color50">12-01</p>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="streamBox">-->
+    <!--<img src="images/pic1.jpg" alt="" class="streamPic">-->
+    <!--<div class="streamDes">-->
+      <!--<div class="desLeft">-->
+        <!--<p class="fs14">烧烤炉CR-03</p>-->
+        <!--<p class="color128 fs14 colorGreen">￥70+<span class="exchangeBlock">30积分</span></p>-->
+      <!--</div>-->
+      <!--<div class="desRight fs14 mr10">-->
+        <!--<p class="color50">12-01</p>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+</div>

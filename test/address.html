@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>收货地址</title>
+  <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.css">
+  <link href="https://cdn.bootcss.com/jquery-weui/1.1.2/css/jquery-weui.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/address.css">
+  <style>
+    body{
+      background-color: #eee;
+    }
+    .weui-label{
+      width: 90px;
+    }
+  </style>
+</head>
+<body>
+<div class="bgcWhite mt10">
+  <div class="weui-cell ">
+    <div class="weui-cell__hd">
+      <label class="weui-label">收货人</label>
+    </div>
+    <div class="weui-cell__bt">
+      <input class="weui-input" type="text" placeholder="姓名">
+    </div>
+  </div>
+  <div class="weui-cell ">
+    <div class="weui-cell__hd">
+      <label class="weui-label">联系电话</label>
+    </div>
+    <div class="weui-cell__bt">
+      <input class="weui-input" type="text" placeholder="手机或固话">
+    </div>
+  </div>
+  <div class="weui-cell ">
+    <div class="weui-cell__hd">
+      <label class="weui-label">选择地区</label>
+    </div>
+    <div class="weui-cell__bt">
+      <input class="weui-input pr20" type="text" id="city-picker" placeholder="地区信息" value="广东省 广州市 天河区" style="padding-right: 30px;">
+    </div>
+    <div class="weui-cell__ft">
+      <img src="../images/down.png" alt="" class="rightArrow" >
+    </div>
+  </div>
+  <div class="weui-cell ">
+    <div class="weui-cell__hd">
+      <label class="weui-label" style="margin-top: -25px;">详细地址</label>
+    </div>
+    <div class="weui-cell__bt">
+      <textarea class="weui-textarea" placeholder="街道门牌信息" style="vertical-align: middle"></textarea>
+      <!--<input class="weui-input" type="text" placeholder="街道门牌信息" >-->
+    </div>
+  </div>
+</div>
+
+<button class="weui-btn bottomBtn">编辑(保存)</button>
+</body>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.1.2/js/jquery-weui.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.1.2/js/city-picker.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.1.2/js/swiper.js"></script>
+<script>
+  $("#city-picker").cityPicker({
+    title: "请选择收货地址"
+  });
+</script>
+</html>

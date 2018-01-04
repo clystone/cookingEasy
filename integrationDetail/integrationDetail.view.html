@@ -1,0 +1,154 @@
+<!-- 新用户积分 -->
+<div ng-show="record.integralRecord.type == 0">
+  <div class="intergrationDetailTop pt20 bgcWhite">
+    <p class="tac fs14 color50">新用户奖励</p>
+    <p class="fs36 tac">+{{record.integralRecord.inefaral}}</p>
+  </div>
+  <div class="intergrationDetailBot bgcWhite">
+    <p class="overFlowHid">
+      <span class="billText fl ml10">创建时间</span>
+      <span class="billText fr color153 mr10">{{record.integralRecord.createTime | date:'yyyy-MM-dd HH:ss'}}</span>
+    </p>
+  </div>
+</div>
+
+<!-- 获得积分 -->
+<div ng-show="record.integralRecord.type == 1">
+  <div class="intergrationDetailTop pt20 bgcWhite">
+    <p class="tac fs14 color50">获得积分</p>
+    <p class="fs36 tac">+{{record.integralRecord.inefaral}}</p>
+    <p class="overFlowHid">
+      <span class="billText fl ml10">订单金额</span>
+      <span class="billText fr color153 mr10">{{record.order.price / 100}}元</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl ml10">商品说明</span>
+      <span class="billText fr color153 mr10">{{record.integralRecord.name}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl ml10">付款方式</span>
+      <span class="billText fr color153 mr10" ng-show="record.order.payType == 0">微信支付</span>
+      <span class="billText fr color153 mr10" ng-show="record.order.payType == 1">农行支付</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl ">积分率</span>
+      <span class="billText fr color153 ">{{record.integralRecord.ratio}}%</span>
+    </p>
+  </div>
+  <div class="intergrationDetailMid bgcWhite">
+    <p class="overFlowHid">
+      <span class="billText fl ml10">收款方</span>
+      <span class="billText fr color153 mr10">{{record.shop.username}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl">订单状态</span>
+      <span class="billText fr color153">交易成功</span>
+    </p>
+  </div>
+  <div class="intergrationDetailBot bgcWhite">
+    <p class="overFlowHid">
+      <span class="billText fl ml10">创建时间</span>
+      <span class="billText fr color153 mr10">{{record.order.createTime | date:'yyyy-MM-dd HH:ss'}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl">订单号</span>
+      <span class="billText fr color153">{{record.order.orderNo}}</span>
+    </p>
+  </div>
+</div>
+<!-- 抵扣积分 -->
+<div ng-show="record.integralRecord.type == 2">
+  <div class="intergrationDetailTop pt20 bgcWhite">
+    <p class="tac fs14 color50">抵扣积分</p>
+    <p class="fs36 tac">{{record.integralRecord.inefaral}}</p>
+    <p class="overFlowHid">
+      <span class="billText fl ml10">订单金额</span>
+      <span class="billText fr color153 mr10">{{record.order.price / 100}}元</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl ml10">兑换方式</span>
+      <span class="billText fr color153 mr10">￥{{record.order.price/100}}+{{record.order.inefral}}积分</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl ">商品说明</span>
+      <span class="billText fr color153 ">{{record.integralRecord.name}}</span>
+    </p>
+  </div>
+  <div class="intergrationDetailMid bgcWhite">
+    <p class="overFlowHid">
+      <span class="billText fl ml10">收款方</span>
+      <span class="billText fr color153 mr10">{{record.shop.username}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl">订单状态</span>
+      <span class="billText fr color153">交易成功</span>
+    </p>
+  </div>
+  <div class="intergrationDetailBot bgcWhite">
+    <p class="overFlowHid">
+      <span class="billText fl ml10">创建时间</span>
+      <span class="billText fr color153 mr10">{{record.order.createTime | date:'yyyy-MM-dd HH:ss'}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl">订单号</span>
+      <span class="billText fr color153">{{record.order.orderNo}}</span>
+    </p>
+  </div>
+</div>
+
+<!--<div class="intergrationDetailTop pt20 bgcWhite">-->
+  <!--<p class="tac fs14 color50">获得积分</p>-->
+  <!--<p class="fs36 tac">+5</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ml10">订单金额</span>-->
+    <!--<span class="billText fr color153 mr10">250元</span>-->
+  <!--</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ml10">商品说明</span>-->
+    <!--<span class="billText fr color153 mr10">付款</span>-->
+  <!--</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ml10">付款方式</span>-->
+    <!--<span class="billText fr color153 mr10">农行支付</span>-->
+  <!--</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ">积分率</span>-->
+    <!--<span class="billText fr color153 ">5%</span>-->
+  <!--</p>-->
+<!--</div>-->
+<!--<div class="intergrationDetailTop pt20 bgcWhite">-->
+  <!--<p class="tac fs14 color50">抵扣积分</p>-->
+  <!--<p class="fs36 tac">-30</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ml10">订单金额</span>-->
+    <!--<span class="billText fr color153 mr10">100元</span>-->
+  <!--</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ml10">兑换方式</span>-->
+    <!--<span class="billText fr color153 mr10">￥70+30积分</span>-->
+  <!--</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ">商品说明</span>-->
+    <!--<span class="billText fr color153 ">艾斯德斯多炒菜机</span>-->
+  <!--</p>-->
+<!--</div>-->
+<!--<div class="intergrationDetailMid bgcWhite">-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ml10">收款方</span>-->
+    <!--<span class="billText fr color153 mr10">合心菜行</span>-->
+  <!--</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl">订单状态</span>-->
+    <!--<span class="billText fr color153">交易成功</span>-->
+  <!--</p>-->
+<!--</div>-->
+<!--<div class="intergrationDetailBot bgcWhite">-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ml10">创建时间</span>-->
+    <!--<span class="billText fr color153 mr10">2017-10-16 09:24</span>-->
+  <!--</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl">订单号</span>-->
+    <!--<span class="billText fr color153">002017101609240000</span>-->
+  <!--</p>-->
+<!--</div>-->

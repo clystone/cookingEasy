@@ -1,0 +1,25 @@
+<div class="exchangeSuccessTop">
+  <i class="weui-icon-success fs36"></i>
+  <span class="color50">恭喜您兑换成功</span>
+</div>
+<div class="exchangeSuccessMid">
+  <div class="exchangeBox">
+    <div class="pl10 color50 overFlowHid">
+      <span class="fs12">订单号</span> <span class="fs12">{{parms.order.orderNo}}</span>
+      <span class="exchangeTime fs12">{{parms.order.createTime | date:'MM-dd'}}</span>
+    </div>
+    <div class="exchangeGoodBox ml10 mt10 por">
+      <img src="images/replace.png" alt="" class="exchangeGoodPic">
+      <div class="exchangeGoodDes">
+        <p class="pt5">{{parms.integralGood.name}}</p>
+        <p class="fs13 color50 mt5">兑换价格 <span class="colorOrange">￥{{parms.integralGood.price/100}}+{{parms.integralGood.integral}}积分</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="exchangeSuccessBot">
+  <p>注意事项</p>
+  <p>1、商品一经兑换，将不予退货、退款等</p>
+  <p>2、兑换后7个工作日内发货，请耐心等待</p>
+</div>
+<button class="exchangeSuccessBtn weui-btn" ui-sref="exchangeRecord">查看记录</button>

@@ -1,0 +1,40 @@
+<div class="integrationTop tac bgcGreen">
+  <p class="fs12 colorWhite">当前积分</p>
+  <p class="fs36 colorWhite">{{pocket.points}}</p>
+  <p class="fs13 walletColor">积分可用于兑换积分商品</p>
+</div>
+<div class="stream" infinite-scroll="loadMore()" infinite-scroll-immediate-check='false' infinite-scroll-disabled='stop'>
+  <div class="streamTit">
+    <span class="pl10 color50">积分流水</span>
+  </div>
+  <div>
+    <div class="streamBox bgcWhite" ui-sref="integrationDetail({id:record.id})" ng-repeat="record in integralRecords">
+      <img src="images/cookingEasy.png" alt="" class="streamPic">
+      <div class="streamDes">
+        <div class="desLeft">
+          <!--<p class="color50 fs14" ng-show="record.inefaral >= 0">{{record.name}}-获取{{record.ratio}}%积分</p>-->
+          <p class="color50 fs14" ng-show="record.inefaral >= 0">{{record.name}}</p>
+          <p class="color50 fs14" ng-show="record.inefaral < 0">{{record.name}}-抵扣积分</p>
+          <p class="color128 fs14">{{record.createTime | date: 'yyyy-MM-dd'}}</p>
+        </div>
+        <div class="desRight fs24 mr10">
+          <p class="color50 mt3" ng-show="record.inefaral < 0">{{record.inefaral}}</p>
+          <p class="color50 mt3" ng-show="record.inefaral > 0">+{{record.inefaral}}</p>
+        </div>
+      </div>
+    </div>
+    <!--<div class="streamBox bgcWhite">-->
+      <!--<img src="images/replace.png" alt="" class="streamPic">-->
+      <!--<div class="streamDes">-->
+        <!--<div class="desLeft">-->
+          <!--<p class="color50 fs14">商品换购抵扣-艾斯德斯多</p>-->
+          <!--<p class="color128 fs14">2017-01-01</p>-->
+        <!--</div>-->
+        <!--<div class="desRight fs24 mr10">-->
+          <!--<p class="color50 mt3">-30</p>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  </div>
+
+</div>

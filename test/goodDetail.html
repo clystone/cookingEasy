@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>商品详情</title>
+  <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/goodDetail.css">
+  <style>
+    body{
+      background-color: #eee;
+    }
+  </style>
+</head>
+<body>
+<div class="exchangeDetailTop bgcWhite">
+  <img src="../images/1.jpg" alt="" class="exchangeTopPic">
+</div>
+<div class="exchangeDetailMid bgcWhite mb10 overFlowHid">
+  <div class="fl midLeft">
+    <p class="fw700 fs16 color50 pt10">德朗韩式3D旋转光波烧烤炉CR-03</p>
+    <p class="color153 fs13">零售价 ￥ 1280.0</p>
+  </div>
+  <div class="fr midRight tac">
+    <p class="mt10 rightTop mr10 ml10">￥70.0</p>
+    <p class="rightBot mr10 ml10 fs12 mb15">+300积分兑换</p>
+  </div>
+
+</div>
+<div class="weui-tab mt10">
+  <div class="weui-navbar">
+    <div class="weui-navbar__item weui-bar__item_on1 toPage1">
+      商品简介
+    </div>
+    <div class="weui-navbar__item toPage2">
+      兑换流程
+    </div>
+    <div class="weui-navbar__item toPage3">
+      注意事项
+    </div>
+  </div>
+  <div class="weui-tab__panel bgcWhite">
+    <div class="page1 mt10">
+      <div>
+        <img src="../images/replace.png" alt="" class="panelPic">
+      </div>
+      <div>
+        <img src="../images/replace.png" alt="" class="panelPic">
+      </div>
+      <div>
+        <img src="../images/replace.png" alt="" class="panelPic">
+      </div>
+    </div>
+    <div class="page2 fs13 color50 mt10" style="display:none">
+      <p class="pl10 pr10">1、用户确认符合活动条件后，点击[马上兑换]，并填写配送信息。</p>
+      <p class="pl10 pr10">2、确认信息无误，提交兑换。</p>
+    </div>
+    <div class="page3 fs13 color50 mt10" style="display:none">
+      <p class="pl10 pr10">1、配送区域：仅限中国大陆地区(港澳台、西藏、新疆等地除外)</p>
+      <p class="pl10 pr10">2、每位用户仅可兑换一次。</p>
+      <p class="pl10 pr10">3、易德菜将在5个工作日内邮寄奖品。</p>
+      <p class="pl10 pr10">4、请提供正确并可正常通信的手机号，提供错误信息导致损失将由用户承担。</p>
+      <p class="pl10 pr10">5、产品邮费由易德菜承担。</p>
+      <p class="pl10 pr10">6、商品兑换后无法退货、退款等。</p>
+    </div>
+  </div>
+</div>
+<div class="fixBox">
+  <div class="weui-cell fs13">
+    <div class="weui-cell__hd">
+      <label class="weui-label w90">配送地址</label>
+    </div>
+    <div class="weui-cell__bt">
+      <input class="weui-input" type="text" placeholder="请填写">
+    </div>
+  </div>
+  <button class="weui-btn bottomBtn" id="toExchange">马上兑换</button>
+</div>
+<div class="mask">
+  <div class="fixBoxPay">
+    <p class="payTit">
+      确认付款
+      <img src="../images/X.png" alt="" class="payPic" style="text-align: right;">
+    </p>
+    <p class="fs30 tac color50">￥70.0</p>
+    <div class="fs12 color128 pb10 pl10">付款方式：</div>
+    <div class="weui-cells weui-cells_radio" style="margin-top: 0;">
+      <label class="weui-cell weui-check__label" for="x11">
+        <div class="weui-cell__bd">
+          <p>微信支付(i***s)</p>
+        </div>
+        <div class="weui-cell__ft">
+          <input type="radio" class="weui-check" name="radio1" id="x11">
+          <span class="weui-icon-checked"></span>
+        </div>
+      </label>
+      <label class="weui-cell weui-check__label" for="x12">
+
+        <div class="weui-cell__bd">
+          <p>农行支付(9919)</p>
+        </div>
+        <div class="weui-cell__ft">
+          <input type="radio" name="radio1" class="weui-check" id="x12" checked="checked">
+          <span class="weui-icon-checked"></span>
+        </div>
+      </label>
+    </div>
+    <div class="weui-cell bb">
+      <div class="weui-cell__bd">
+        <img src="../images/card1.png" alt="" class="mainIcon">
+        <span class="pl10 vermid">绑定银行卡付款</span>
+      </div>
+      <div class="weui-cell__ft">
+        <img src="../images/down.png" alt="" class="rightArrow">
+      </div>
+    </div>
+    <button class="specialBottomBtn weui-btn">立即支付</button>
+  </div>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script src="https://res.wx.qq.com/open/libs/weuijs/1.1.2/weui.js"></script>
+<script>
+  $(".toPage1").click(function () {
+    $(".page1").show();
+    $(".page2").hide();
+    $(".page3").hide();
+    $(".weui-navbar").children().removeClass("weui-bar__item_on1");
+    $(this).addClass("weui-bar__item_on1")
+  });
+  $(".toPage2").click(function () {
+    $(".page1").hide();
+    $(".page2").show();
+    $(".page3").hide();
+    $(".weui-navbar").children().removeClass("weui-bar__item_on1");
+    $(this).addClass("weui-bar__item_on1")
+  });
+  $(".toPage3").click(function () {
+    $(".page1").hide();
+    $(".page2").hide();
+    $(".page3").show();
+    $(".weui-navbar").children().removeClass("weui-bar__item_on1");
+    $(this).addClass("weui-bar__item_on1")
+  });
+  $("#toExchange").click(function () {
+    weui.confirm('兑换该商品将扣除300积分，另需支付70元，点击确定继续', {
+      title: '确定兑换？',
+      buttons: [{
+        label: '取消',
+        type: 'default',
+        onClick: function(){ console.log('no') }
+      }, {
+        label: '确定',
+        type: 'primary',
+        onClick: function(){  $(".mask").show(); }
+      }]
+    });
+  });
+  $(".payPic").click(function () {
+    $(".mask").hide();
+  })
+</script>
+</html>

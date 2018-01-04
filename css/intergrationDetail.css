@@ -1,0 +1,21 @@
+.billHead p:last-child,.billMid p:last-child,.billBot p:last-child{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-bottom: 10px;
+    border-bottom:1px solid #eee;
+}
+
+.billHead p:first-child,.billMid p:first-child,.billBot p:first-child{
+    padding-top: 10px;
+}
+
+.intergrationDetailTop p:last-child,.intergrationDetailMid p:last-child,.intergrationDetailBot p:last-child{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-bottom: 10px;
+    border-bottom:1px solid #eee;
+}
+
+.intergrationDetailTop p:first-child,.intergrationDetailMid p:first-child,.intergrationDetailBot p:first-child{
+    padding-top: 10px;
+}

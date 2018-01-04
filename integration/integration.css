@@ -1,0 +1,39 @@
+.integrationTop{
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.streamTit{
+    background-color: rgba(229, 229, 229, 1);
+    height: 40px;
+    line-height: 40px;
+}
+
+.streamBox{
+    padding-left: 10px;
+    padding-top: 15px;
+    border-bottom:1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.streamPic{
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.streamDes{
+    margin-left:60px;
+    overflow: hidden;
+}
+
+.desLeft{
+    float: left;
+}
+
+.desRight{
+    float: right;
+}

@@ -1,0 +1,21 @@
+<div class="memberList">
+  <div class="memberBox bgcWhite" ng-repeat="user in users">
+    <img ng-src="{{user.headImgUrl}}" alt="" onerror="this.src='images/default.png'"  class="memberPic">
+    <span class="vermid pl10">{{user.nickname}}</span>
+  </div>
+  <!--<div class="memberBox">-->
+    <!--<img src="images/replace.png" alt="" class="memberPic">-->
+    <!--<span class="vermid pl10">何丽丽</span>-->
+  <!--</div>-->
+  <!--<div class="memberBox">-->
+    <!--<img src="images/replace.png" alt="" class="memberPic">-->
+    <!--<span class="vermid pl10">何丽丽</span>-->
+  <!--</div>-->
+  <!--<div class="memberBox">-->
+    <!--<img src="images/replace.png" alt="" class="memberPic">-->
+    <!--<span class="vermid pl10">何丽丽</span>-->
+  <!--</div>-->
+</div>
+<div class="memberBottom">
+  <p class="tac">{{usersNum}}位推荐人</p>
+</div>

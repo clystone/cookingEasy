@@ -1,0 +1,77 @@
+.walletHead{
+    height: 180px;
+    background-color: rgba(24, 186, 101, 1);
+    color: #fff;
+    position: relative;
+}
+
+.walletHeadTop{
+    height: 124px;
+}
+
+.walletHeadBot{
+    height: 56px;
+    background-color: rgba(255, 255, 255, 0.075);
+}
+
+.walletColor{
+    color: rgba(124, 245, 173, 1)
+}
+
+.streamTit{
+    background-color: rgba(229, 229, 229, 1);
+    height: 40px;
+    line-height: 40px;
+}
+
+.streamBox{
+    padding-left: 10px;
+    padding-top: 15px;
+    border-bottom:1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.streamPic{
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+.streamDes{
+    margin-left:60px;
+    overflow: hidden;
+}
+
+.desLeft{
+    float: left;
+}
+
+.desRight{
+    float: right;
+}
+
+/*.streamBox:last-child{*/
+    /*margin-bottom: 100px;*/
+/*}*/
+
+.fixBot{
+    /*background-color: rgba(24, 186, 101, 1);*/
+    /*color: white;*/
+    /*font-size: 20px;*/
+    height: 40px;
+    background-color: #fff;
+    width: 100%;
+    position: fixed;
+    bottom:0;
+
+}
+
+button.fixBtn{
+    width: 90%;
+    background-color: rgba(24, 186, 101, 1);
+    font-size: 20px;
+    line-height: 40px;
+    margin:0 5%;
+}

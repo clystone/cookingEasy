@@ -1,0 +1,285 @@
+<!-- 消费 -->
+<div ng-show="record.pr.type == 0">
+  <div class="billHead bgcWhite">
+    <p class="billText tac">金额(元)</p>
+    <p class="tac fs36">{{record.pr.price / 100}}</p>
+    <p class="overFlowHid">
+      <span class="billText fl ml10">订单金额</span>
+      <span class="billText fr color153 mr10">{{record.order.price / 100}}元</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl ml10">商品说明</span>
+      <span class="billText fr color153 mr10">{{record.pr.name}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl">付款方式</span>
+      <span class="billText fr color153" ng-show="record.order.payType == 1">农行支付</span>
+      <span class="billText fr color153" ng-show="record.order.payType == 0">微信支付</span>
+    </p>
+  </div>
+  <div class="billMid bgcWhite">
+    <p class="overFlowHid">
+      <span class="billText fl ml10">收款方</span>
+      <span class="billText fr color153 mr10">{{record.shop.username}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl">订单状态</span>
+      <span class="billText fr color153">交易成功</span>
+    </p>
+  </div>
+  <div class="billBot bgcWhite">
+    <p class="overFlowHid">
+      <span class="billText fl ml10">创建时间</span>
+      <span class="billText fr color153 mr10">{{record.order.createTime | date:'yyyy-MM-dd HH:ss'}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl">订单号</span>
+      <span class="billText fr color153">{{record.order.orderNo}}</span>
+    </p>
+  </div>
+</div>
+
+<!-- 消费返佣 -->
+<div ng-show="record.pr.type == 1">
+  <div class="billHead bgcWhite">
+    <p class="billText tac">金额(元)</p>
+    <p class="tac fs36">{{record.pr.price / 100}}</p>
+    <p class="overFlowHid">
+      <span class="billText fl ml10">订单金额</span>
+      <span class="billText fr color153 mr10">{{record.order.price / 100}}元</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl ml10">商品说明</span>
+      <span class="billText fr color153 mr10">{{record.pr.name}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl">付款方式</span>
+      <span class="billText fr color153" ng-show="record.order.payType == 1">农行支付</span>
+      <span class="billText fr color153" ng-show="record.order.payType == 0">微信支付</span>
+    </p>
+  </div>
+  <div class="billMid bgcWhite">
+    <p class="overFlowHid">
+      <span class="billText fl ml10">付款人</span>
+      <span class="billText fr color153 mr10">{{record.user.nickname}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl ml10">所属等级</span>
+      <span class="billText fr color153 mr10">{{record.pr.level}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl">佣金率</span>
+      <span class="billText fr color153">{{record.pr.ps}}%</span>
+    </p>
+  </div>
+  <div class="billMid bgcWhite">
+    <p class="overFlowHid">
+      <span class="billText fl ml10">收款方</span>
+      <span class="billText fr color153 mr10">{{record.shop.username}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl">订单状态</span>
+      <span class="billText fr color153">交易成功</span>
+    </p>
+  </div>
+  <div class="billBot bgcWhite">
+    <p class="overFlowHid">
+      <span class="billText fl ml10">创建时间</span>
+      <span class="billText fr color153 mr10">{{record.order.createTime | date:'yyyy-MM-dd HH:ss'}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl">订单号</span>
+      <span class="billText fr color153">{{record.order.orderNo}}</span>
+    </p>
+  </div>
+</div>
+
+<!-- 下级返佣 -->
+<div ng-show="record.pr.type == 2">
+  <div class="billHead bgcWhite">
+    <p class="billText tac">金额(元)</p>
+    <p class="tac fs36">{{record.pr.price / 100}}</p>
+    <p class="overFlowHid">
+      <span class="billText fl ml10">订单金额</span>
+      <span class="billText fr color153 mr10">{{record.order.price / 100}}元</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl ">商品说明</span>
+      <span class="billText fr color153 ">{{record.pr.name}}</span>
+    </p>
+  </div>
+  <div class="billMid bgcWhite">
+    <p class="overFlowHid">
+      <span class="billText fl ml10">付款人</span>
+      <span class="billText fr color153 mr10">{{record.user.nickname}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl ml10">所属等级</span>
+      <span class="billText fr color153 mr10">{{record.pr.level}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl">佣金率</span>
+      <span class="billText fr color153">{{record.pr.ps}}%</span>
+    </p>
+  </div>
+  <div class="billBot bgcWhite">
+    <p class="overFlowHid">
+      <span class="billText fl ml10">创建时间</span>
+      <span class="billText fr color153 mr10">{{record.order.createTime | date:'yyyy-MM-dd HH:ss'}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl">订单号</span>
+      <span class="billText fr color153">{{record.order.orderNo}}</span>
+    </p>
+  </div>
+</div>
+
+<!-- 商品兑换 -->
+<div ng-show="record.pr.type == 4">
+  <div class="billHead bgcWhite">
+    <p class="billText tac">金额(元)</p>
+    <p class="tac fs36">{{record.pr.price / 100}}</p>
+    <p class="overFlowHid">
+      <span class="billText fl ml10">订单金额</span>
+      <span class="billText fr color153 mr10">{{record.order.price / 100}}元</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl ml10">兑换方式</span>
+      <span class="billText fr color153 mr10">{{record.pr.remark}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl ">商品说明</span>
+      <span class="billText fr color153 ">{{record.pr.name}}</span>
+    </p>
+  </div>
+  <div class="billMid bgcWhite">
+    <p class="overFlowHid">
+      <span class="billText fl ml10">收款方</span>
+      <span class="billText fr color153 mr10">{{record.shop.username}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl">订单状态</span>
+      <span class="billText fr color153">交易成功</span>
+    </p>
+  </div>
+  <div class="billBot bgcWhite">
+    <p class="overFlowHid">
+      <span class="billText fl ml10">创建时间</span>
+      <span class="billText fr color153 mr10">{{record.order.createTime | date:'yyyy-MM-dd HH:ss'}}</span>
+    </p>
+    <p class="overFlowHid">
+      <span class="billText fl">订单号</span>
+      <span class="billText fr color153">{{record.order.orderNo}}</span>
+    </p>
+  </div>
+</div>
+
+
+
+<!--<div class="billHead bgcWhite">-->
+  <!--<p class="billText tac">金额(元)</p>-->
+  <!--<p class="tac fs36">{{record.pr.price / 100}}</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ml10">订单金额</span>-->
+    <!--<span class="billText fr color153 mr10">{{record.order.price / 100}}元</span>-->
+  <!--</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ">商品说明</span>-->
+    <!--<span class="billText fr color153 ">{{record.pr.name}}</span>-->
+  <!--</p>-->
+<!--</div>-->
+<!--<div class="billHead bgcWhite">-->
+  <!--<p class="billText tac">金额(元)</p>-->
+  <!--<p class="tac fs36">{{record.pr.price / 100}}</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ml10">订单金额</span>-->
+    <!--<span class="billText fr color153 mr10">{{record.order.price / 100}}元</span>-->
+  <!--</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ml10">兑换方式</span>-->
+    <!--<span class="billText fr color153 mr10">{{record.pr.remark}}</span>-->
+  <!--</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ">商品说明</span>-->
+    <!--<span class="billText fr color153 ">{{record.pr.name}}</span>-->
+  <!--</p>-->
+<!--</div>-->
+<!--<div class="billHead bgcWhite">-->
+  <!--<p class="billText tac">金额(元)</p>-->
+  <!--<p class="tac fs36">{{record.pr.price / 100}}</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ml10">订单金额</span>-->
+    <!--<span class="billText fr color153 mr10">{{record.order.price / 100}}元</span>-->
+  <!--</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ml10">商品说明</span>-->
+    <!--<span class="billText fr color153 mr10">{{record.pr.name}}</span>-->
+  <!--</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl">付款方式</span>-->
+    <!--<span class="billText fr color153" ng-show="record.order.payType == 1">农行支付</span>-->
+    <!--<span class="billText fr color153" ng-show="record.order.payType == 0">微信支付</span>-->
+  <!--</p>-->
+<!--</div>-->
+<!--<div class="billMid bgcWhite">-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ml10">付款人</span>-->
+    <!--<span class="billText fr color153 mr10">{{record.user.nickname}}</span>-->
+  <!--</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ml10">所属等级</span>-->
+    <!--<span class="billText fr color153 mr10">{{record.pr.level}}</span>-->
+  <!--</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl">佣金率</span>-->
+    <!--<span class="billText fr color153">{{record.pr.ps}}%</span>-->
+  <!--</p>-->
+<!--</div>-->
+<!--<div class="billMid bgcWhite">-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ml10">收款方</span>-->
+    <!--<span class="billText fr color153 mr10">{{record.shop.username}}</span>-->
+  <!--</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl">订单状态</span>-->
+    <!--<span class="billText fr color153">交易成功</span>-->
+  <!--</p>-->
+<!--</div>-->
+<!--<div>-->
+  <!--<div class="billMid bgcWhite">-->
+    <!--<p class="overFlowHid">-->
+      <!--<span class="billText fl ml10">付款人</span>-->
+      <!--<span class="billText fr color153 mr10">{{record.user.nickname}}</span>-->
+    <!--</p>-->
+    <!--<p class="overFlowHid">-->
+      <!--<span class="billText fl ml10">所属等级</span>-->
+      <!--<span class="billText fr color153 mr10">{{record.pr.level}}</span>-->
+    <!--</p>-->
+    <!--<p class="overFlowHid">-->
+      <!--<span class="billText fl">佣金率</span>-->
+      <!--<span class="billText fr color153">{{record.pr.ps}}%</span>-->
+    <!--</p>-->
+  <!--</div>-->
+  <!--<div class="billMid bgcWhite">-->
+    <!--<p class="overFlowHid">-->
+      <!--<span class="billText fl ml10">收款方</span>-->
+      <!--<span class="billText fr color153 mr10">{{record.shop.username}}</span>-->
+    <!--</p>-->
+    <!--<p class="overFlowHid">-->
+      <!--<span class="billText fl">订单状态</span>-->
+      <!--<span class="billText fr color153">交易成功</span>-->
+    <!--</p>-->
+  <!--</div>-->
+<!--</div>-->
+
+<!--<div class="billBot bgcWhite">-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl ml10">创建时间</span>-->
+    <!--<span class="billText fr color153 mr10">{{record.order.createTime | date:'yyyy-MM-dd HH:ss'}}</span>-->
+  <!--</p>-->
+  <!--<p class="overFlowHid">-->
+    <!--<span class="billText fl">订单号</span>-->
+    <!--<span class="billText fr color153">{{record.order.orderNo}}</span>-->
+  <!--</p>-->
+<!--</div>-->
+

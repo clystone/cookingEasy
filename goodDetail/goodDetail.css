@@ -1,0 +1,117 @@
+.exchangeDetailTop{
+    width: 100%;
+    height: 100%;
+}
+
+.exchangeTopPic{
+    width: 100%;
+    height: 100%;
+}
+
+.exchangeDetailMid{
+    padding-left: 10px;
+}
+
+.exchangeDesLeft{
+    position: absolute;
+    font-size: 12px;
+    color: #505050;
+}
+
+.exchangeDesRight{
+    margin-left: 60px;
+    font-size: 12px;
+    color: #505050;
+}
+
+.weui-bar__item_on1{
+    border-bottom: 2px solid rgb(24,186,101);
+}
+
+.panelPic{
+    width: 100%;
+    /*height: 150px;*/
+    height: 100%;
+}
+
+.goodDetailPicBox:last-child{
+    padding-bottom: 110px;
+}
+
+.midLeft{
+    width: 60%;
+}
+
+.midRight{
+    width: 40%;
+}
+
+.rightTop{
+    padding: 10px;
+    color: rgb(24,186,101);
+    border: 1px solid rgb(24,186,101);
+}
+
+.rightBot{
+    padding: 5px;
+    color: #fff;
+    background-color: rgb(24,186,101);
+}
+
+.fixBox{
+    width: 100%;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    z-index:1000;
+}
+
+.w90{
+    width: 90px;
+}
+
+.fixBoxPay{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: #fff;
+}
+
+.payTit{
+    padding: 10px 0;
+    color: #505050;
+    font-weight: 700;
+    text-align: center;
+    border-bottom:1px solid #eee;
+}
+
+.payTit .payPic{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 16px;
+    height: 16px;
+}
+.mainIcon{
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+}
+
+button.specialBottomBtn{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 40px;
+    background-color: rgb(24,186,101);
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.weui-mask{
+    visibility: visible;
+}
+
+.weui-dialog, .weui-toast{
+    visibility: visible;
+}

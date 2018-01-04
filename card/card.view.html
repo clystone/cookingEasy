@@ -1,0 +1,40 @@
+<div ng-hide="info == 4">
+  <div class="cardBox">
+    <div class="overFlowHid">
+      <div class="fl">
+    <span class="bgcWhite iconBox">
+      <img src="images/abc.png" alt="" class="cardIcon">
+    </span>
+      </div>
+      <div class="fl mt15 ml10">
+        <p class="colorWhite">农业银行</p>
+        <p class="fs12 colorWhite">储蓄卡</p>
+      </div>
+      <div class="fr">
+        <span class="cardBlock">快捷支付</span>
+      </div>
+    </div>
+    <div class="colorWhite tac fs20 mt15">****&nbsp;&nbsp;****&nbsp;&nbsp;****&nbsp;&nbsp;{{cardNum}}</div>
+  </div>
+  <div class="weui-cell bb bt" ng-click="newCard()">
+    <div class="weui-cell__bd">
+      <img src="images/plus.png" alt="" class="newCardPic">
+      <span class="pl10 vermid">修改银行卡</span>
+    </div>
+    <div class="weui-cell__ft">
+      <img src="images/down.png" alt="" class="rightArrow">
+    </div>
+  </div>
+</div>
+
+<div ng-hide="info == 1">
+  <div class="weui-cell bb bt" ng-click="newCard()">
+    <div class="weui-cell__bd">
+      <img src="images/plus.png" alt="" class="newCardPic">
+      <span class="pl10 vermid">绑定银行卡</span>
+    </div>
+    <div class="weui-cell__ft">
+      <img src="images/down.png" alt="" class="rightArrow">
+    </div>
+  </div>
+</div>

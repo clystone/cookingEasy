@@ -1,0 +1,50 @@
+.exchangeRecordTop{
+    height: 40px;
+    line-height: 40px;
+}
+
+.streamTit{
+    background-color: rgba(229, 229, 229, 1);
+    height: 40px;
+    line-height: 40px;
+}
+
+.streamBox{
+    padding-left: 10px;
+    padding-top: 15px;
+    border-bottom:1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.streamPic{
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.streamDes{
+    margin-left:60px;
+    overflow: hidden;
+}
+
+.desLeft{
+    float: left;
+}
+
+.desRight{
+    float: right;
+}
+
+.exchangeBlock{
+    padding:0 3px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    background-color: rgb(24,186,101);
+    color: #ffffff;
+    font-size: 12px;
+}

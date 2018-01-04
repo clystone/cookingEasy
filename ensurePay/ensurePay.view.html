@@ -1,0 +1,43 @@
+<div class="ensurePayHead tac">
+  <div class="tac pt30">
+    <img src="images/default.png" alt="" class="headPic vermid" ng-show="!parms.shop.headImgUrl">
+    <img src="{{parms.shop.headImgUrl}}" alt="" class="headPic vermid" ng-show="parms.shop.headImgUrl">
+    <span class="vermid">{{parms.shop.username}}</span>
+  </div>
+  <p class="color128 pt10">确认付款</p>
+  <p class="fs36">{{parms.order.price/100 | currency:'￥':2}}</p>
+</div>
+<div class="ensurePayMain">
+  <div class="fs12 color128 pb10 pl10">付款方式：</div>
+  <div class="weui-cells weui-cells_radio" style="margin-top: 0;">
+    <label class="weui-cell weui-check__label" for="x11">
+      <div class="weui-cell__bd">
+        <p>微信支付<span class="pl10 fs12 colorOrange">可获取50%积分</span></p>
+      </div>
+      <div class="weui-cell__ft">
+        <input type="radio" class="weui-check" name="radio1" id="x11">
+        <span class="weui-icon-checked"></span>
+      </div>
+    </label>
+    <label class="weui-cell weui-check__label" for="x12">
+
+      <div class="weui-cell__bd">
+        <p>农行支付<span class="pl10 fs12 colorOrange">可获取100%积分</span></p>
+      </div>
+      <div class="weui-cell__ft">
+        <input type="radio" name="radio1" class="weui-check" id="x12" checked="checked">
+        <span class="weui-icon-checked"></span>
+      </div>
+    </label>
+  </div>
+  <div class="weui-cell bb" ui-sref="card">
+    <div class="weui-cell__bd">
+      <img src="images/card1.png" alt="" class="mainIcon">
+      <span class="pl10 vermid">绑定银行卡付款</span>
+    </div>
+    <div class="weui-cell__ft">
+      <img src="images/down.png" alt="" class="rightArrow">
+    </div>
+  </div>
+</div>
+<button class="weui-btn ensurePayBtn" ng-click="payNow()">立即支付</button>

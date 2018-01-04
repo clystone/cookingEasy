@@ -1,0 +1,19 @@
+.ruleTop{
+    color: rgb(153,153,153);
+    font-size: 12px;
+}
+
+.ruleTop:before,.ruleTop:after{
+    content: '';                 /*CSS伪类用法*/
+    position: absolute;         /*定位背景横线的位置*/
+    top: 52%;
+    background: rgb(153,153,153);       /*宽和高做出来的背景横线*/
+    width: 12%;
+    height: 1px;
+}
+.ruleTop:before{
+    left: 25%;
+}
+.ruleTop:after{
+    right: 25%;
+}

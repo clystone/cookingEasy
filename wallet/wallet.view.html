@@ -1,0 +1,68 @@
+<div class="walletHead">
+  <div class="walletHeadTop tac">
+    <p class="fs36 pt25">{{pocket.money/100}}</p>
+    <p class="fs12 walletColor">账户余额(元)</p>
+  </div>
+  <div class="walletHeadBot">
+    <div class="weui-flex tac">
+      <div class="weui-flex__item">
+        <p class="pt5">{{today/100}}</p>
+        <p class="walletColor fs12">今日收益(元)</p>
+      </div>
+      <div class="weui-flex__item">
+        <p class="pt5">{{pocket.frozen/100}}</p>
+        <p class="walletColor fs12">提现中(元)</p>
+      </div>
+      <div class="weui-flex__item">
+        <p class="pt5">{{sum / 100}}</p>
+        <p class="walletColor fs12">累计收益(元)</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="stream" infinite-scroll="loadMore()" infinite-scroll-immediate-check='false' infinite-scroll-disabled='stop'>
+  <div class="streamTit">
+    <span class="pl10 color50">账单流水</span>
+  </div>
+  <div class="streamBox bgcWhite" ui-sref="bill({id:record.id})" ng-repeat="record in prs">
+    <img src="images/cookingEasy.png" alt="" class="streamPic">
+    <div class="streamDes">
+      <div class="desLeft">
+        <p class="color50 fs14">{{record.name}}<span ng-show="record.level">-{{record.level}}级返佣</span></p>
+        <p class="color128 fs14">{{record.createTime | date : 'yyyy-MM-dd '}}</p>
+      </div>
+      <div class="desRight fs24 mr10">
+        <p class="color50 mt3">{{record.price / 100}}元</p>
+      </div>
+    </div>
+  </div>
+  <div style="height: 50px;">
+    <p class="tac">&nbsp;</p>
+  </div>
+  <!--<div class="streamBox bgcWhite">-->
+    <!--<img src="images/replace.png" alt="" class="streamPic">-->
+    <!--<div class="streamDes">-->
+      <!--<div class="desLeft">-->
+        <!--<p class="color50 fs14">何丽丽-一级返佣</p>-->
+        <!--<p class="color128 fs14">2017-01-01</p>-->
+      <!--</div>-->
+      <!--<div class="desRight fs24 mr10">-->
+        <!--<p class="color50 mt3">+50元</p>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+</div>
+<!--<div class="tac mb50">加载更多</div>-->
+<div class="fixBot">
+  <button class="weui-btn fixBtn" ng-click="showWithDraw()">提现</button>
+</div>
+<div class="mask" ng-show="isWithDraw">
+  <div class="fixBoxPay">
+    <p class="payTit">
+      确认提现
+      <img src="images/X.png" alt="" class="payPic" style="text-align: right;" ng-click="hideWithDraw()">
+    </p>
+    <input type="number" class="weui-input tac" placeholder="请输入提现金额" ng-model="money">
+    <button class="specialBottomBtn weui-btn" ng-click="withDraw()">立即提现</button>
+  </div>
+</div>

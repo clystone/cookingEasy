@@ -1,0 +1,99 @@
+.greenTop{
+    background-color: rgb(24,186,101);
+    height: 90px;
+}
+
+.shopLogo{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 90px;
+    left: 50%;
+    margin-left: -50px;
+    margin-top: -50px;
+}
+
+.shopLocation{
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 40px;
+    line-height: 40px;
+    border-top: 1px solid #cccccc;
+}
+
+.smallIcon{
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.disBlock{
+    display: inline-block;
+    padding: 0 10px;
+    color: rgba(255, 195, 0, 1);
+    background-color: rgba(255, 254, 243, 1);
+    box-shadow: 0 0 0 0.02rem rgba(255, 222, 116, 1);
+    margin-bottom: 15px;
+}
+
+.w33{
+    width: 33.3%;
+
+}
+
+.Grid {
+    display: flex;
+}
+
+.Grid-cell {
+    flex: 1;
+}
+
+.Grid1{
+    flex: 1;
+}
+
+.Grid2{
+    flex: 2;
+}
+
+.gridPic{
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 60px;
+}
+
+.boderNone{
+    border: none;
+}
+
+.shopFixBot{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.fixBtn1{
+    width: 33.3%;
+    height: 50px;
+    line-height: 50px;
+    color: #fff;
+    text-align: center;
+    background-color: rgba(44, 60, 52, 1);
+}
+
+.fixBtn1 img{
+    width: 21px;
+    height: 21px;
+    vertical-align: middle;
+}
+
+.fixBtn2{
+    width: 66.7%;
+    height: 50px;
+    line-height: 50px;
+    color: #fff;
+    text-align: center;
+    background-color: rgba(24, 186, 101, 1);
+}

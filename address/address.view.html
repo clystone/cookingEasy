@@ -1,0 +1,87 @@
+<div ng-show="hasAddress == 0">
+<!--<div>-->
+  <div class="bgcWhite mt10">
+    <div class="weui-cell ">
+      <div class="weui-cell__hd">
+        <label class="weui-label">收货人</label>
+      </div>
+      <div class="weui-cell__bt">
+        <input class="weui-input" type="text" placeholder="姓名" ng-model="name">
+      </div>
+    </div>
+    <div class="weui-cell ">
+      <div class="weui-cell__hd">
+        <label class="weui-label">联系电话</label>
+      </div>
+      <div class="weui-cell__bt">
+        <input class="weui-input" type="text" placeholder="手机号" ng-model="phone">
+      </div>
+    </div>
+    <div class="weui-cell ">
+      <div class="weui-cell__hd">
+        <label class="weui-label">选择地区</label>
+      </div>
+      <div class="weui-cell__bt">
+        <input class="weui-input pr20" type="text" id="city-picker" placeholder="地区信息" value="广东省 广州市 天河区" style="padding-right: 30px;">
+      </div>
+      <div class="weui-cell__ft">
+        <img src="images/down.png" alt="" class="rightArrow" >
+      </div>
+    </div>
+    <div class="weui-cell ">
+      <div class="weui-cell__hd">
+        <label class="weui-label" style="margin-top: -25px;">详细地址</label>
+      </div>
+      <div class="weui-cell__bt">
+        <textarea class="weui-textarea" placeholder="街道门牌信息" style="vertical-align: middle" ng-model="addr"></textarea>
+        <!--<input class="weui-input" type="text" placeholder="街道门牌信息" >-->
+      </div>
+    </div>
+  </div>
+  <button class="weui-btn bottomBtn" ng-click="saveAddress()">保存</button>
+</div>
+
+
+<div ng-show="hasAddress == 1">
+<!--<div>-->
+  <div class="bgcWhite mt10">
+    <div class="weui-cell ">
+      <div class="weui-cell__hd">
+        <label class="weui-label">收货人</label>
+      </div>
+      <div class="weui-cell__bt">
+        <span>{{addresses[0].name}}</span>
+      </div>
+    </div>
+    <div class="weui-cell ">
+      <div class="weui-cell__hd">
+        <label class="weui-label">联系电话</label>
+      </div>
+      <div class="weui-cell__bt">
+        <span>{{addresses[0].phone}}</span>
+      </div>
+    </div>
+    <div class="weui-cell ">
+      <div class="weui-cell__hd">
+        <label class="weui-label">收货地区</label>
+      </div>
+      <div class="weui-cell__bt">
+        <span>{{addresses[0].province}} {{addresses[0].city}} {{addresses[0].district}}</span>
+      </div>
+      <!--<div class="weui-cell__ft">-->
+        <!--<img src="images/down.png" alt="" class="rightArrow" >-->
+      <!--</div>-->
+    </div>
+    <div class="weui-cell ">
+      <div class="weui-cell__hd">
+        <label class="weui-label">详细地址</label>
+      </div>
+      <div class="weui-cell__bt">
+        <span>{{addresses[0].addr}}</span>
+        <!--<textarea class="weui-textarea" placeholder="街道门牌信息" style="vertical-align: middle"></textarea>-->
+        <!--<input class="weui-input" type="text" placeholder="街道门牌信息" >-->
+      </div>
+    </div>
+  </div>
+  <button class="weui-btn bottomBtn" ng-click="toAdd()">编辑</button>
+</div>
