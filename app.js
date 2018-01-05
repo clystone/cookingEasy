@@ -1,9 +1,9 @@
 (function () {
   'use strict';
   //todo：更改服务器地址
-  const url = 'http://192.168.2.103:8081';
+  // const url = 'http://192.168.2.103:8081';
   $.toast.prototype.defaults.duration = 1000;
-  // const url = 'http://www.cookingeasy.cn';
+  const url = 'http://www.cookingeasy.cn';
   var myApp = angular.module("myApp", ['ui.router', 'ui.router.state.events', 'infinite-scroll']);
   myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
@@ -443,8 +443,8 @@
     else if (token) {
       locals.set("token", token);
       //todo 摆上服务器更改为:易德菜服务器地址
-      $window.location.href = "http://localhost:8083/cookingEasy/trunk/index.html#/main"
-      // $window.location.href = "http://www.cookingeasy.cn/user/index.html#/main"
+      // $window.location.href = "http://localhost:8083/cookingEasy/trunk/index.html#/main"
+      $window.location.href = "http://www.cookingeasy.cn/user/index.html#/main"
     }
 
     function getQueryString(name) {
@@ -894,17 +894,17 @@
               console.log($scope.latitude);
               console.log($scope.longitude);
               //todo:摆上服务器更改为获取当前地址
-              // $http.get(url + '/api/shop/findLocation?longitude=' + $scope.longitude + '&latitude=' + $scope.latitude, {headers: {"TOKEN": token}})
-              //   .then(res => {
-              //     console.log(res.data);
-              //     $scope.shops = res.data.parms.shops;
-              //     $scope.distances = $scope.shops.map(function (i) {
-              //       return {howFar: Math.floor(getDistance($scope.latitude, $scope.longitude, i.latitude, i.longitude))}
-              //     });
-              //     console.log($scope.distances);
-              //     $scope.json1 = angular.merge({}, $scope.distances, $scope.shops);
-              //     console.log($scope.json1);
-              //   });
+              $http.get(url + '/api/shop/findLocation?longitude=' + $scope.longitude + '&latitude=' + $scope.latitude, {headers: {"TOKEN": token}})
+                .then(res => {
+                  console.log(res.data);
+                  $scope.shops = res.data.parms.shops;
+                  $scope.distances = $scope.shops.map(function (i) {
+                    return {howFar: Math.floor(getDistance($scope.latitude, $scope.longitude, i.latitude, i.longitude))}
+                  });
+                  console.log($scope.distances);
+                  $scope.json1 = angular.merge({}, $scope.distances, $scope.shops);
+                  console.log($scope.json1);
+                });
             }
           });
         });
@@ -917,17 +917,17 @@
         console.log(err);
       });
 
-    $http.get(url + '/api/shop/findLocation?longitude=' + 113.4337 + '&latitude=' + 23.1606, {headers: {"TOKEN": token}})
-      .then(res => {
-        console.log(res.data);
-        $scope.shops = res.data.parms.shops;
-        $scope.distances = $scope.shops.map(function (i) {
-          return {howFar: Math.floor(getDistance(23.1606, 113.4337, i.latitude, i.longitude))}
-        });
-        console.log($scope.distances);
-        $scope.json1 = angular.merge({}, $scope.distances, $scope.shops);
-        console.log($scope.json1);
-      });
+    // $http.get(url + '/api/shop/findLocation?longitude=' + 113.4337 + '&latitude=' + 23.1606, {headers: {"TOKEN": token}})
+    //   .then(res => {
+    //     console.log(res.data);
+    //     $scope.shops = res.data.parms.shops;
+    //     $scope.distances = $scope.shops.map(function (i) {
+    //       return {howFar: Math.floor(getDistance(23.1606, 113.4337, i.latitude, i.longitude))}
+    //     });
+    //     console.log($scope.distances);
+    //     $scope.json1 = angular.merge({}, $scope.distances, $scope.shops);
+    //     console.log($scope.json1);
+    //   });
 
     $scope.toShop = () => {
       $state.go("shop")
@@ -1090,7 +1090,11 @@
   myApp.controller('shopCtr', ['$scope', 'locals', '$state', '$http', '$timeout', function ($scope, locals, $state, $http, $timeout) {
     document.body.style.backgroundColor = '#eeeeee';
     let token = locals.get("token");
+    $scope.img1 = 'http://www.cookingeasy.cn/images/ad/0.jpg?random=' + Math.random() * 10000;
+    $scope.img2 = 'http://www.cookingeasy.cn/images/ad/1.jpg?random=' + Math.random() * 10000;
+    $scope.img3 = 'http://www.cookingeasy.cn/images/ad/2.jpg?random=' + Math.random() * 10000;
     $scope.curtentPage = 2;
+    $scope.firstTime = true;
 
     $http.get(url + '/api/pocket/find', {headers: {"TOKEN": token}})
       .then(res => {
@@ -1108,39 +1112,48 @@
         });
         let firstType = res.data.parms.goodTypes[0].id;
         console.log(firstType);
-        $http.get(url + '/api/goodtype/findAllType/' + firstType, {headers: {"TOKEN": token}})
+
+        $http.get(url + '/api/integral/findAll?page=1&size=6', {headers: {"TOKEN": token}})
           .then(res => {
             console.log(res.data);
-            $scope.secondType = res.data.parms.goodTypes;
-            console.log($scope.secondType.length);
-            if($scope.secondType.length > 0){
-              // $scope.typeId = res.data.parms.goodTypes[0].id;
-              $scope.typeId =firstType;
-              $scope.list3 = $scope.secondType.map(function (i) {
-                return {id: i.id, value: i.clazz}
-              });
-              $("#trigger2").text("请选择小类型");
-              mobileSelect2.updateWheel(0, $scope.list3);
-              $http.get(url + '/api/goodtype/findAlligt/' + $scope.typeId + '?page=1&size=6', {headers: {"TOKEN": token}})
-                .then(res => {
-                  console.log(res.data);
-                  $scope.integralGoods = res.data.parms.integralGoods;
-                  $scope.maxSize = res.data.parms.maxSize;
-                })
-            }
-            else{
-              $scope.typeId = firstType;
-              $http.get(url + '/api/goodtype/findAlligt/' + $scope.typeId + '?page=1&size=6', {headers: {"TOKEN": token}})
-                .then(res => {
-                  console.log(res.data);
-                  $scope.integralGoods = res.data.parms.integralGoods;
-                  $scope.maxSize = res.data.parms.maxSize;
-                });
-              console.log('没有小类型');
-              $("#trigger2").text("请选择小类型")
-            }
-            
+            $scope.integralGoods = res.data.parms.integralGoods;
+            $scope.maxSize = res.data.parms.maxSize;
+            $("#trigger1").text("请选择分类");
           });
+
+        // $http.get(url + '/api/goodtype/findAllType/' + firstType, {headers: {"TOKEN": token}})
+        //   .then(res => {
+        //     console.log(res.data);
+        //     $scope.secondType = res.data.parms.goodTypes;
+        //     console.log($scope.secondType.length);
+        //     if($scope.secondType.length > 0){
+        //       // $scope.typeId = res.data.parms.goodTypes[0].id;
+        //       $scope.typeId =firstType;
+        //       $scope.list3 = $scope.secondType.map(function (i) {
+        //         return {id: i.id, value: i.clazz}
+        //       });
+        //       $("#trigger2").text("请选择小类型");
+        //       mobileSelect2.updateWheel(0, $scope.list3);
+        //       $http.get(url + '/api/goodtype/findAlligt/' + $scope.typeId + '?page=1&size=6', {headers: {"TOKEN": token}})
+        //         .then(res => {
+        //           console.log(res.data);
+        //           $scope.integralGoods = res.data.parms.integralGoods;
+        //           $scope.maxSize = res.data.parms.maxSize;
+        //         })
+        //     }
+        //     else{
+        //       $scope.typeId = firstType;
+        //       $http.get(url + '/api/goodtype/findAlligt/' + $scope.typeId + '?page=1&size=6', {headers: {"TOKEN": token}})
+        //         .then(res => {
+        //           console.log(res.data);
+        //           $scope.integralGoods = res.data.parms.integralGoods;
+        //           $scope.maxSize = res.data.parms.maxSize;
+        //         });
+        //       console.log('没有小类型');
+        //       $("#trigger2").text("请选择小类型")
+        //     }
+        //
+        //   });
         console.log($scope.list1);
         var mobileSelect1 = new MobileSelect({
           trigger: '#trigger1',
@@ -1150,6 +1163,8 @@
           ],
           position: [0], //初始化定位
           callback: function (indexArr, data) {
+            $scope.firstTime = false;
+            $scope.check = true;
             $scope.resultNull = '';
             $scope.curtentPage = 2;
             $scope.stop = false;
@@ -1216,35 +1231,47 @@
     //   });
 
     $(document).ready(function () {
+      // weui.searchBar('#searchBar');
       var mySwiper = new Swiper('.swiper-container', {
         loop: true,
         autoplay: {
-          delay: 2000,
+          delay: 3000,
+          disableOnInteraction: false
         },
+
       });
     });
 
 
-
     $scope.search = () => {
       console.log($scope.searchName);
-      if(!$scope.searchName){
-        // $.alert({text: '缺少搜索内容'});
-        console.log('require')
+      $scope.curtentPage = 2;
+      $scope.firstTime = false;
+      $scope.stop = true;
+      if (!$scope.searchName) {
+        $.alert({text: '缺少搜索内容'});
+        // console.log('缺少搜索内容')
       }
-      else{
+      else {
         $http.get(url + '/api/integral/findn/' + $scope.searchName, {headers: {"TOKEN": token}})
           .then(res => {
             console.log(res.data);
             $scope.searchName = '';
             $scope.integralGoods = res.data.parms.integralGoods;
-            document.getElementById("input1").blur();
-            if(res.data.parms.integralGoods.length === 0){
+            // document.getElementById("input1").blur();
+            if (res.data.parms.integralGoods.length === 0) {
               $scope.resultNull = 0;
+              $scope.resultNum = res.data.parms.integralGoods.length;
+            }
+            else if(res.data.parms.integralGoods.length === 6){
+              $scope.resultNull = '';
+              $scope.stop = false;
+              $scope.resultNum = res.data.parms.integralGoods.length;
             }
             else{
               $scope.resultNull = '';
               $scope.stop = true;
+              $scope.resultNum = res.data.parms.integralGoods.length;
             }
           })
       }
@@ -1253,17 +1280,49 @@
     $scope.loadMore = () => {
       console.log(111);
       $scope.stop = true;
-      $http.get(url + '/api/goodtype/findAlligt/' + $scope.typeId + '?page=' + $scope.curtentPage + '&size=6', {headers: {"TOKEN": token}})
-        .then(res => {
-          console.log(res.data);
-          // console.log(res.data.parms.integralGoods.length);
-          if (res.data.info == 1 && res.data.parms.integralGoods.length > 0) {
-            $scope.integralGoods = $scope.integralGoods.concat(res.data.parms.integralGoods);
-            $scope.curtentPage++;
-            console.log($scope.curtentPage);
-            $scope.stop = false;
-          }
-        });
+      if ($scope.typeId) {
+        $http.get(url + '/api/goodtype/findAlligt/' + $scope.typeId + '?page=' + $scope.curtentPage + '&size=6', {headers: {"TOKEN": token}})
+          .then(res => {
+            console.log(res.data);
+            // console.log(res.data.parms.integralGoods.length);
+            if (res.data.info == 1 && res.data.parms.integralGoods.length > 0) {
+              $scope.integralGoods = $scope.integralGoods.concat(res.data.parms.integralGoods);
+              $scope.curtentPage++;
+              console.log($scope.curtentPage);
+              $scope.stop = false;
+            }
+          });
+      }
+      else if($scope.firstTime){
+        $http.get(url + '/api/integral/findAll?page=' + $scope.curtentPage + '&size=6', {headers: {"TOKEN": token}})
+          .then(res => {
+            console.log(res.data);
+            if (res.data.info == 1 && res.data.parms.integralGoods.length > 0) {
+              $scope.integralGoods = $scope.integralGoods.concat(res.data.parms.integralGoods);
+              $scope.curtentPage++;
+              console.log($scope.curtentPage);
+              $scope.stop = false;
+            }
+            $("#trigger1").text("积分商城");
+          });
+      }
+      else if($scope.resultNum == 6){
+        $http.get(url + '/api/integral/findAll?page=' + $scope.curtentPage + '&size=6', {headers: {"TOKEN": token}})
+          .then(res => {
+            console.log(res.data);
+            if (res.data.info == 1 && res.data.parms.integralGoods.length > 0) {
+              $scope.integralGoods = $scope.integralGoods.concat(res.data.parms.integralGoods);
+              $scope.curtentPage++;
+              console.log($scope.curtentPage);
+              $scope.stop = false;
+            }
+            $("#trigger1").text("积分商城");
+          });
+      }
+      else{
+
+      }
+
     };
 
     $scope.toMain = () => {
@@ -1433,7 +1492,7 @@
         if (response.data.info == 18) {
           console.log(111);
           //todo:登录失效
-          // $window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2d63fca66c12d30a&redirect_uri=http%3a%2f%2fwww.cookingeasy.cn%2fapi%2fpc%2frelate2&response_type=code&scope=snsapi_userinfo&state=0#wechat_redirect";
+          $window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2d63fca66c12d30a&redirect_uri=http%3a%2f%2fwww.cookingeasy.cn%2fapi%2fpc%2frelate2&response_type=code&scope=snsapi_userinfo&state=0#wechat_redirect";
         }
         return response;
       }

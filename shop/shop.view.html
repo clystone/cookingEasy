@@ -1,86 +1,111 @@
 <div class="shopHead bgcWhite">
-  <div class="weui-flex" style="height: 60px;">
-    <div class="weui-flex__item br bb pb10" ui-sref="wallet">
-      <div class="placeholder">
-        <img src="images/money.png" alt="" class="shopPic">
-        <div class="shopItem pt10">
-          <p class="fs14">我的余额</p>
-          <p class="fs12 color128">{{pocket.money / 100}}</p>
+    <div class="weui-flex" style="height: 60px;">
+        <div class="weui-flex__item br bb pb10" ui-sref="wallet">
+            <div class="placeholder">
+                <img src="images/money.png" alt="" class="shopPic">
+                <div class="shopItem pt10">
+                    <p class="fs14">我的余额</p>
+                    <p class="fs12 color128">{{pocket.money / 100}}</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="weui-flex__item bb pb10" ui-sref="integration">
-      <div class="placeholder">
-        <img src="images/integral.png" alt="" class="shopPic">
-        <div class="shopItem pt10">
-          <p class="fs14">我的积分</p>
-          <p class="fs12 color128">{{pocket.points}}</p>
+        <div class="weui-flex__item bb pb10" ui-sref="integration">
+            <div class="placeholder">
+                <img src="images/integral.png" alt="" class="shopPic">
+                <div class="shopItem pt10">
+                    <p class="fs14">我的积分</p>
+                    <p class="fs12 color128">{{pocket.points}}</p>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="weui-flex" style="height: 60px;" >
-    <div class="weui-flex__item  br bb pb10" ui-sref="address">
-      <div class="placeholder" style="line-height: 60px;">
-        <img src="images/location.png" alt="" class="shopIcon">
-        <p class="vermid fs14">收货地址</p>
-      </div>
+    <div class="weui-flex" style="height: 60px;">
+        <div class="weui-flex__item  br bb pb10" ui-sref="address">
+            <div class="placeholder" style="line-height: 60px;">
+                <img src="images/location.png" alt="" class="shopIcon">
+                <p class="vermid fs14">收货地址</p>
+            </div>
+        </div>
+        <div class="weui-flex__item bb pb10" ui-sref="exchangeRecord">
+            <div class="placeholder" style="line-height: 60px;">
+                <img src="images/record.png" alt="" class="shopIcon">
+                <p class="vermid fs14">兑换记录</p>
+            </div>
+        </div>
     </div>
-    <div class="weui-flex__item bb pb10" ui-sref="exchangeRecord">
-      <div class="placeholder" style="line-height: 60px;">
-        <img src="images/record.png" alt="" class="shopIcon">
-        <p class="vermid fs14">兑换记录</p>
-      </div>
-    </div>
-  </div>
 </div>
 
 <div class="">
-  <div class="shopListHead" style="overflow: hidden;">
-    <p class="tac">商品兑换</p>
-    <span id="trigger1" class="select1">{{list1[0].value}}</span>
-    <span id="trigger2" class="select1">{{secondType[0].clazz}}</span>
-  </div>
-  <div class="swiper-container bgcWhite">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide"><img src="http://www.cookingeasy.cn/images/ad/0.jpg" alt="" style="height: 233px; width: 100%;" onerror="this.src='images/cookingEasy.png'"></div>
-      <div class="swiper-slide"><img src="http://www.cookingeasy.cn/images/ad/1.jpg" alt="" style="height: 233px; width: 100%;" onerror="this.src='images/cookingEasy.png'"></div>
-      <div class="swiper-slide" id="slide3"><img src="http://www.cookingeasy.cn/images/ad/2.jpg" alt="" style="height: 233px; width: 100%;" onerror="this.src='images/cookingEasy.png'"></div>
+    <div class="shopListHead" style="overflow: hidden;">
+        <p class="tac">商品兑换</p>
+        <span id="trigger1" class="select1">{{list1[0].value}}</span>
+        <span id="trigger2" class="select1">{{secondType[0].clazz}}</span>
     </div>
-  </div>
-  <div class="weui-search-bar" id="searchBar" style="padding: 12px 30px">
-    <form class="weui-search-bar__form" ng-submit="search()">
-      <div class="weui-search-bar__box">
-        <i class="weui-icon-search"></i>
-        <input id="input1" type="search" class="weui-search-bar__input" placeholder="搜索" required="" ng-model="searchName">
-        <a href="javascript:" class="weui-icon-clear"></a>
-      </div>
-      <label class="weui-search-bar__label">
-        <i class="weui-icon-search"></i>
-        <span>搜索</span>
-      </label>
-    </form>
-    <a href="javascript:" class="weui-search-bar__cancel-btn">取消</a>
-  </div>
-  <div class="weui-flex bgcWhite">
-    <div class="weui-flex__item" infinite-scroll="loadMore()" infinite-scroll-distance="0" infinite-scroll-immediate-check='false' infinite-scroll-disabled='stop' style="width: 100%">
-      <div class="shopListBox" ng-repeat="i in integralGoods">
-        <p class="pl10 fs14 pt5" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">{{i.name}}</p>
-        <div ui-sref="goodDetail({id:i.id})">
-          <p class="pl10 colorGreen fs12" style="height: 39px;">￥{{i.price/100}}+<span class="integral">{{i.integral}}积分</span></p>
-          <img ng-src="http://www.cookingeasy.cn/images/good/{{i.id}}/logo.jpg" alt="" onerror="this.src='images/default.png'" class="goodPic mb10">
+    <!--<div class="weui-search-bar" id="searchBar" style="padding: 10px 30px">-->
+    <!--<form class="weui-search-bar__form" ng-submit="search()" style="height: 40px;line-height: 40px;">-->
+    <!--<div class="weui-search-bar__box">-->
+    <!--<i class="weui-icon-search" style="top: 7px;"></i>-->
+    <!--<input id="input1" type="search" class="weui-search-bar__input" placeholder="搜索" required="" ng-model="searchName">-->
+    <!--<a href="javascript:" class="weui-icon-clear" style="top: 7px;"></a>-->
+    <!--</div>-->
+    <!--<label class="weui-search-bar__label">-->
+    <!--<i class="weui-icon-search"></i>-->
+    <!--<span>搜索</span>-->
+    <!--</label>-->
+    <!--</form>-->
+    <!--<a href="javascript:" class="weui-search-bar__cancel-btn" style="margin-top: 7px;">取消</a>-->
+    <!--</div>-->
+    <div class="swiper-container bgcWhite">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="height: 233px; width: 100%;"><img ng-src="{{img1}}" alt=""
+                                                                               onerror="this.src='images/cookingEasy.png'"
+                                                                               style="height: 233px; width: 100%;">
+            </div>
+            <div class="swiper-slide" style="height: 233px; width: 100%;"><img src="{{img2}}" alt=""
+                                                                               style="height: 233px; width: 100%;"
+                                                                               onerror="this.src='images/cookingEasy.png'">
+            </div>
+            <div class="swiper-slide" style="height: 233px; width: 100%;"><img src="{{img3}}" alt=""
+                                                                               style="height: 233px; width: 100%;"
+                                                                               onerror="this.src='images/cookingEasy.png'">
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div ng-show="maxSize == 0" class="mt20">
-    <p class="tac">没有此类商品</p>
-  </div>
-  <div ng-show="resultNull === 0">
-    <p class="tac">没有查到符合的商品</p>
-  </div>
+
+    <div class="">
+        <div class="weui-cell">
+            <div class="weui-cell__bd bgcWhite">
+                <input class="weui-input pl10" id="input1" type="text" placeholder="搜索积分商品" ng-model="searchName"/>
+            </div>
+            <div class="weui-cell__ft">
+                <button class="weui-btn weui-btn_mini weui-btn_default" ng-click="search()">搜索</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="weui-flex bgcWhite">
+        <div class="weui-flex__item" infinite-scroll="loadMore()" infinite-scroll-distance="0"
+             infinite-scroll-immediate-check='false' infinite-scroll-disabled='stop' style="width: 100%">
+            <div class="shopListBox" ng-repeat="i in integralGoods">
+                <p class="pl10 fs14 pt5" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+                    {{i.name}}</p>
+                <div ui-sref="goodDetail({id:i.id})">
+                    <p class="pl10 colorGreen fs12" style="height: 39px;">￥{{i.price/100}}+<span class="integral">{{i.integral}}积分</span>
+                    </p>
+                    <img ng-src="http://www.cookingeasy.cn/images/good/{{i.id}}/logo.jpg" alt=""
+                         onerror="this.src='images/default.png'" class="goodPic mb10">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-show="maxSize == 0" class="mt20">
+        <p class="tac">没有此类商品</p>
+    </div>
+    <div ng-show="resultNull === 0">
+        <p class="tac">没有查到符合的商品</p>
+    </div>
 </div>
 
 <div class="homeBox" ng-click="toMain()">
-  <img src="images/home.png" alt="">
+    <img src="images/home.png" alt="">
 </div>
