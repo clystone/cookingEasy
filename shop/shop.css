@@ -87,3 +87,7 @@
 /*.shopListBox:nth-child(2n){*/
     /*padding-left: 2%;*/
 /*}*/
+
+.swiper-slide{
+    min-height: 40px;
+}

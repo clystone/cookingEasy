@@ -57,16 +57,16 @@
     <!--</div>-->
     <div class="swiper-container bgcWhite">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" style="height: 233px; width: 100%;"><img ng-src="{{img1}}" alt=""
+            <div class="swiper-slide slice1" style="width: 100%;"><img ng-src="{{img1}}" alt=""
                                                                                onerror="this.src='images/cookingEasy.png'"
-                                                                               style="height: 233px; width: 100%;">
+                                                                               style="width: 100%;vertical-align: bottom;" class="swiperImg">
             </div>
-            <div class="swiper-slide" style="height: 233px; width: 100%;"><img src="{{img2}}" alt=""
-                                                                               style="height: 233px; width: 100%;"
+            <div class="swiper-slide slice1" style="width: 100%;"><img src="{{img2}}" alt=""
+                                                                               style="width: 100%;vertical-align: bottom;" class="swiperImg"
                                                                                onerror="this.src='images/cookingEasy.png'">
             </div>
-            <div class="swiper-slide" style="height: 233px; width: 100%;"><img src="{{img3}}" alt=""
-                                                                               style="height: 233px; width: 100%;"
+            <div class="swiper-slide slice1" style="width: 100%;"><img src="{{img3}}" alt=""
+                                                                               style="width: 100%;vertical-align: bottom;" class="swiperImg"
                                                                                onerror="this.src='images/cookingEasy.png'">
             </div>
         </div>
@@ -90,10 +90,14 @@
                 <p class="pl10 fs14 pt5" style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
                     {{i.name}}</p>
                 <div ui-sref="goodDetail({id:i.id})">
-                    <p class="pl10 colorGreen fs12" style="height: 39px;">￥{{i.price/100}}+<span class="integral">{{i.integral}}积分</span>
+                    <p class="pl10 colorGreen fs12">￥{{i.retailPrice/100}}+<span class="integral">{{i.integral}}积分</span>
                     </p>
-                    <img ng-src="http://www.cookingeasy.cn/images/good/{{i.id}}/logo.jpg" alt=""
-                         onerror="this.src='images/default.png'" class="goodPic mb10">
+                    <!--<p class="pl10 colorGreen fs12">零售价：￥{{i.retailPrice/100}}</p>-->
+                    <!--<p class="pl10 colorGreen fs12" style="height: 39px;">兑换价格：￥{{i.price/100}}+<span class="integral">{{i.integral}}积分</span></p>-->
+                    <div>
+                        <img ng-src="http://www.cookingeasy.cn/images/good/{{i.id}}/logo.jpg" alt=""
+                             onerror="this.src='images/default.png'" class="goodPic mb10">
+                    </div>
                 </div>
             </div>
         </div>

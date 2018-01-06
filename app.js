@@ -1232,6 +1232,12 @@
 
     $(document).ready(function () {
       // weui.searchBar('#searchBar');
+      var windowWidth = $(window).width();
+      var imgHeight = windowWidth  / 2;
+      $(".swiper-slide").height = imgHeight;
+      $(".swiperImg").height = imgHeight;
+      console.log(imgHeight);
+      console.log(windowWidth);
       var mySwiper = new Swiper('.swiper-container', {
         loop: true,
         autoplay: {
@@ -1246,13 +1252,15 @@
     $scope.search = () => {
       console.log($scope.searchName);
       $scope.curtentPage = 2;
-      $scope.firstTime = false;
-      $scope.stop = true;
+      $("#trigger1").text("请选择分类");
+      $("#trigger2").text("");
       if (!$scope.searchName) {
         $.alert({text: '缺少搜索内容'});
         // console.log('缺少搜索内容')
       }
       else {
+        $scope.firstTime = false;
+        $scope.stop = true;
         $http.get(url + '/api/integral/findn/' + $scope.searchName, {headers: {"TOKEN": token}})
           .then(res => {
             console.log(res.data);
@@ -1263,14 +1271,8 @@
               $scope.resultNull = 0;
               $scope.resultNum = res.data.parms.integralGoods.length;
             }
-            else if(res.data.parms.integralGoods.length === 6){
-              $scope.resultNull = '';
-              $scope.stop = false;
-              $scope.resultNum = res.data.parms.integralGoods.length;
-            }
             else{
               $scope.resultNull = '';
-              $scope.stop = true;
               $scope.resultNum = res.data.parms.integralGoods.length;
             }
           })
@@ -1303,20 +1305,7 @@
               console.log($scope.curtentPage);
               $scope.stop = false;
             }
-            $("#trigger1").text("积分商城");
-          });
-      }
-      else if($scope.resultNum == 6){
-        $http.get(url + '/api/integral/findAll?page=' + $scope.curtentPage + '&size=6', {headers: {"TOKEN": token}})
-          .then(res => {
-            console.log(res.data);
-            if (res.data.info == 1 && res.data.parms.integralGoods.length > 0) {
-              $scope.integralGoods = $scope.integralGoods.concat(res.data.parms.integralGoods);
-              $scope.curtentPage++;
-              console.log($scope.curtentPage);
-              $scope.stop = false;
-            }
-            $("#trigger1").text("积分商城");
+
           });
       }
       else{
