@@ -1095,6 +1095,7 @@
     $scope.img3 = 'http://www.cookingeasy.cn/images/ad/2.jpg?random=' + Math.random() * 10000;
     $scope.curtentPage = 2;
     $scope.firstTime = true;
+    $scope.stop = true;
 
     $http.get(url + '/api/pocket/find', {headers: {"TOKEN": token}})
       .then(res => {
@@ -1116,6 +1117,7 @@
         $http.get(url + '/api/integral/findAll?page=1&size=6', {headers: {"TOKEN": token}})
           .then(res => {
             console.log(res.data);
+            $scope.stop = false;
             $scope.integralGoods = res.data.parms.integralGoods;
             $scope.maxSize = res.data.parms.maxSize;
             $("#trigger1").text("请选择分类");
