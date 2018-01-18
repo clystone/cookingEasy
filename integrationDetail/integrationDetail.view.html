@@ -32,7 +32,7 @@
     </p>
     <p class="overFlowHid">
       <span class="billText fl ">积分率</span>
-      <span class="billText fr color153 ">{{record.integralRecord.ratio}}%</span>
+      <span class="billText fr color153 ">{{record.integralRecord.ratio * 100}}%</span>
     </p>
   </div>
   <div class="intergrationDetailMid bgcWhite">
@@ -92,6 +92,20 @@
     <p class="overFlowHid">
       <span class="billText fl">订单号</span>
       <span class="billText fr color153">{{record.order.orderNo}}</span>
+    </p>
+  </div>
+</div>
+
+<!-- 推荐用户获得积分 -->
+<div ng-show="record.integralRecord.type == 3">
+  <div class="intergrationDetailTop pt20 bgcWhite">
+    <p class="tac fs14 color50">推荐用户奖励</p>
+    <p class="fs36 tac">+{{record.integralRecord.inefaral}}</p>
+  </div>
+  <div class="intergrationDetailBot bgcWhite">
+    <p class="overFlowHid">
+      <span class="billText fl ml10">创建时间</span>
+      <span class="billText fr color153 mr10">{{record.integralRecord.createTime | date:'yyyy-MM-dd HH:ss'}}</span>
     </p>
   </div>
 </div>

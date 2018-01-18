@@ -8,12 +8,23 @@
   <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/ensurePay.css">
+  <script>
+    if (self != top) {
+      // 我们的正常页面
+      var url = location.href;
+      // 父级页面重定向
+      top.location = url;
+    }
+    else{
+
+    }
+  </script>
 </head>
 <body ng-controller="ensurePayCtr">
 <div class="ensurePayHead tac">
   <div class="tac pt30">
-    <img src="images/default.png" alt="" class="headPic vermid" ng-show="!parms.shop.headImgUrl">
-    <img src="{{parms.shop.headImgUrl}}" alt="" class="headPic vermid" ng-show="parms.shop.headImgUrl">
+    <!--<img src="images/default.png" alt="" class="headPic vermid" ng-show="!parms.shop.headImgUrl">-->
+    <img ng-src="http://www.cookingeasy.cn/images/shop/{{parms.shop.id}}/logo.jpg" alt="" class="headPic vermid" onerror="this.src='images/default.png'">
     <span class="vermid" ng-bind="parms.shop.username"></span>
   </div>
   <p class="color128 pt10">确认付款</p>

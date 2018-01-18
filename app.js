@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   //todo：更改服务器地址
-  // const url = 'http://192.168.2.103:8081';
+  // const url = 'http://192.168.2.117:8081';
   $.toast.prototype.defaults.duration = 1000;
   const url = 'http://www.cookingeasy.cn';
   var myApp = angular.module("myApp", ['ui.router', 'ui.router.state.events', 'infinite-scroll']);
@@ -441,6 +441,7 @@
       $.alert({text: '系统异常'});
     }
     else if (token) {
+    // if (token) {
       locals.set("token", token);
       //todo 摆上服务器更改为:易德菜服务器地址
       // $window.location.href = "http://localhost:8083/cookingEasy/trunk/index.html#/main"
@@ -591,6 +592,7 @@
         .then(res => {
           console.log(res.data);
           if (res.data.info == 1) {
+            $.alert({text: '确认成功！'});
             $state.reload();
           }
         });
@@ -673,6 +675,23 @@
       $scope.id = locals.get("goodDetailId")
     }
 
+    // wx.ready(function () {
+    //   wx.onMenuShareAppMessage({
+    //     title: '测试标题', // 分享标题
+    //     desc: '测试描述', // 分享描述
+    //     link: 'http://www.cookingeasy.cn/user/index.html#/goodDetail', // 分享链接，该链接域名必须与当前企业的可信域名一致
+    //     imgUrl: 'http://www.cookingeasy.cn/images/good/213/logo.jpg', // 分享图标
+    //     type: '', // 分享类型,music、video或link，不填默认为link
+    //     dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+    //     success: function () {
+    //       // 用户确认分享后执行的回调函数
+    //       console.log(111)
+    //     },
+    //     cancel: function () {
+    //       // 用户取消分享后执行的回调函数
+    //     }
+    //   });
+    // });
 
     let token = locals.get("token");
 
@@ -875,7 +894,7 @@
           timestamp: timestamp, // 必填，生成签名的时间戳
           nonceStr: noncestr, // 必填，生成签名的随机串
           signature: signature,// 必填，签名，见附录1
-          jsApiList: ['getLocation', 'scanQRCode', 'chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+          jsApiList: ['getLocation', 'scanQRCode', 'chooseWXPay','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         });
         wx.ready(function () {
           console.log(222);
@@ -1054,7 +1073,7 @@
   }]);
 
   myApp.controller('recommendCodeCtr', ['$scope', 'locals', '$state', '$http', '$timeout', function ($scope, locals, $state, $http, $timeout) {
-    document.body.style.backgroundColor = '#ffffff';
+    document.body.style.backgroundColor = '#ccc';
     let token = locals.get("token");
 
     $http.get(url + '/api/user/getMyQrc', {headers: {"TOKEN": token}})
@@ -1063,8 +1082,14 @@
         if (res.data.info == 1) {
           $scope.imgUrl = res.data.parms.url;
         }
-
       });
+
+    $http.get(url + '/api/user/findmy', {headers: {"TOKEN": token}})
+      .then(res => {
+        console.log(res.data);
+        $scope.user = res.data.parms.user;
+      });
+
   }]);
 
   myApp.controller('recommendMemberCtr', ['$scope', 'locals', '$state', '$http', '$timeout', function ($scope, locals, $state, $http, $timeout) {
@@ -1103,7 +1128,7 @@
         $scope.pocket = res.data.parms.pocket
       });
 
-    $http.get(url + '/api/goodtype/findAllType/0', {headers: {"TOKEN": token}})
+    $http.get(url + '/api/goodtype/getGoodTypeByPositionu/0', {headers: {"TOKEN": token}})
       .then(res => {
         console.log(res.data);
         $scope.level1 = res.data.parms.goodTypes;

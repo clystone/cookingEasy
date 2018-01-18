@@ -9,7 +9,7 @@
       <span class="exchangeTime fs12">{{parms.order.createTime | date:'MM-dd'}}</span>
     </div>
     <div class="exchangeGoodBox ml10 mt10 por">
-      <img src="images/replace.png" alt="" class="exchangeGoodPic">
+      <img ng-src="http://www.cookingeasy.cn/images/good/{{parms.integralGood.id}}/logo.jpg" alt="" class="exchangeGoodPic" onerror="this.src='images/default.png'">
       <div class="exchangeGoodDes">
         <p class="pt5">{{parms.integralGood.name}}</p>
         <p class="fs13 color50 mt5">兑换价格 <span class="colorOrange">￥{{parms.integralGood.price/100}}+{{parms.integralGood.integral}}积分</span></p>

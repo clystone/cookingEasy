@@ -1,4 +1,20 @@
-<div class="codeBox">
-  <p class="tac pb20">个人推荐码</p>
-  <img ng-src="{{imgUrl}}" alt="" class="recommendCode">
+<div class="bgcWhite alignCen">
+  <a href="javascript: void(0);" class="weui-media-box weui-media-box_appmsg">
+    <div class="weui-media-box__hd">
+      <img ng-src="{{user.headImgUrl}}" class="weui-media-box__thumb" alt="">
+    </div>
+    <div class="weui-media-box__bd">
+      <div class="weui-media-box__title">{{user.nickname}}
+        <img src="images/male.png" alt="" class="titlePic" ng-show="user.sex == 1">
+        <img src="images/female.png" alt="" class="titlePic" ng-show="user.sex == 2">
+      </div>
+      <div class="weui-media-box__desc">{{user.province}} {{user.city}}</div>
+    </div>
+  </a>
+
+  <div class="codeBox">
+    <img ng-src="{{imgUrl}}" alt="" class="recommendCode">
+    <!--<img src="images/test.jpg" alt="" class="recommendCode">-->
+    <h4 class="tac color128 pb10" style="letter-spacing: 2px">我的推荐码</h4>
+  </div>
 </div>

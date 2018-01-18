@@ -32,6 +32,17 @@
   <link rel="stylesheet" href="goodDetail/goodDetail.css">
   <link rel="stylesheet" href="exchangeSuccess/exchangeSuccess.css">
 </head>
+<script>
+  if (self != top) {
+    // 我们的正常页面
+    var url = location.href;
+    // 父级页面重定向
+    top.location = url;
+  }
+  else{
+
+  }
+</script>
 <body ng-controller="indexCtr">
 
 <div ui-view ></div>

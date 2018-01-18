@@ -9,6 +9,17 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/ensurePay.css">
 </head>
+<script>
+  if (self != top) {
+    // 我们的正常页面
+    var url = location.href;
+    // 父级页面重定向
+    top.location = url;
+  }
+  else{
+
+  }
+</script>
 <body ng-controller="ensurePayCtr">
 <div class="ensurePayHead tac">
   <div class="tac pt30">
