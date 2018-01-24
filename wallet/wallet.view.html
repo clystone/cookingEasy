@@ -25,7 +25,8 @@
     <span class="pl10 color50">账单流水</span>
   </div>
   <div class="streamBox bgcWhite" ui-sref="bill({id:record.id})" ng-repeat="record in prs">
-    <img src="images/cookingEasy.png" alt="" class="streamPic">
+    <img src="images/cookingEasy.png" alt="" class="streamPic" ng-show="!record.headUrl">
+    <img ng-src="{{record.headUrl}}" alt="" onerror="this.src='images/cookingEasy.png'" class="streamPic" ng-show="record.headUrl">
     <div class="streamDes">
       <div class="desLeft">
         <p class="color50 fs14">{{record.name}}<span ng-show="record.level">-{{record.level}}级返佣</span></p>

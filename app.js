@@ -47,6 +47,12 @@
         templateUrl: "card/card.view.html",
         controller: 'cardCtr'
       })
+      .state("chooseTake", {
+        url: "/chooseTake",
+        templateUrl: "chooseTake/chooseTake.view.html",
+        controller: 'chooseTakeCtr',
+        params: {id: ''}
+      })
       .state("ensurePay", {
         url: "/ensurePay",
         templateUrl: "ensurePay/ensurePay.view.html",
@@ -69,11 +75,23 @@
         templateUrl: "exchangeSuccess/exchangeSuccess.view.html",
         controller: 'exchangeSuccessCtr'
       })
+      .state("expressGood", {
+        url: "/expressGood",
+        templateUrl: "expressGood/expressGood.view.html",
+        controller: 'expressGoodCtr',
+        params: {id: ''}
+      })
       .state("goodDetail", {
-        url: "/goodDetail",
+        url: "/goodDetail/:id",
         templateUrl: "goodDetail/goodDetail.view.html",
         controller: 'goodDetailCtr',
-        params: {id: ''}
+        // params: {id: ''}
+      })
+      .state("goodRedirect", {
+        url: "/goodRedirect/:id",
+        templateUrl: "goodRedirect/goodRedirect.view.html",
+        controller: 'goodRedirectCtr',
+        // params: {id: ''}
       })
       .state("integration", {
         url: "/integration",
@@ -127,6 +145,12 @@
         templateUrl: "shopDetail/shopDetail.view.html",
         controller: 'shopDetailCtr',
         // params: {id: ''}
+      })
+      .state("takeGood", {
+        url: "/takeGood",
+        templateUrl: "takeGood/takeGood.view.html",
+        controller: 'takeGoodCtr',
+        params: {args: ''}
       })
       .state("verifyPhone", {
         url: "/verifyPhone",
@@ -434,6 +458,121 @@
     }
   }]);
 
+  myApp.controller('chooseTakeCtr', ['$scope', 'locals', '$state', '$http', '$timeout','$stateParams', function ($scope, locals, $state, $http, $timeout,$stateParams) {
+    document.body.style.backgroundColor = '#eeeeee';
+    let token = locals.get("token");
+    let params = $stateParams;
+    if (params.id) {
+      locals.set("goodDetailId", params.id);
+      $scope.id = params.id;
+    }
+    else {
+      $scope.id = locals.get("goodDetailId")
+    }
+    console.log(params);
+    $scope.currentPage = 2;
+
+    $scope.longitude = locals.get("longitude");
+    $scope.latitude = locals.get("latitude");
+
+    $http.get(url + '/api/shop/findLocation2/true?longitude=' + $scope.longitude + '&latitude=' + $scope.latitude, {headers: {"TOKEN": token}})
+      .then(res => {
+        console.log(res.data);
+        $scope.shops = res.data.parms.shops;
+        if(res.data.parms.shops.length == 0){
+          $scope.nearby = 0;
+        }
+        else{
+          $scope.nearby = 1;
+        }
+        // $scope.distances = $scope.shops.map(function (i) {
+        //   return {howFar: Math.floor(getDistance($scope.latitude, $scope.longitude, i.latitude, i.longitude))}
+        //   });
+        // console.log($scope.distances);
+        // $scope.json1 = angular.merge({}, $scope.distances, $scope.shops);
+        // console.log($scope.json1);
+        });
+
+    $http.get(url + '/api/addr/find', {headers: {"TOKEN": token}})
+      .then(res => {
+        console.log(res.data);
+        if (res.data.info == 1) {
+          $scope.addresses = res.data.parms.addresses;
+          if (res.data.parms.addresses.length == 0) {
+
+          }
+          else if (res.data.parms.addresses.length > 0) {
+            $scope.name = res.data.parms.addresses[0].name;
+            $scope.phone = res.data.parms.addresses[0].phone;
+          }
+          console.log($scope.addresses);
+        }
+      });
+
+    
+    $scope.takeShop = (shop,$event) => {
+      console.log(shop);
+      if(!$scope.name){
+        $.toast("缺少姓名", "forbidden");
+      }
+      else if(!$scope.phone){
+        $.toast("缺少手机号", "forbidden");
+      }
+      else if($scope.phone.length != 11){
+        $.toast("手机号错误", "forbidden");
+      }
+      else{
+        $state.go("takeGood",{args:{id:$scope.id,province:shop.province,city:shop.city,district:shop.district,addr:shop.addr,shopId:shop.id,username:shop.username,phone:$scope.phone,name:$scope.name}})
+      }
+    };
+
+    $("#city-picker").cityPicker({
+      title: '请选择城市',
+      showDistrict: false,
+      onClose: function () {
+        $scope.nearby = 2;
+        console.log($("#city-picker").val().split(" "));
+        let address = $("#city-picker").val().split(" ");
+        $scope.province = address[0];
+        $scope.city = address[1];
+        $http.get(url + '/api/shop/getPickShop/'+$scope.province+'/'+$scope.city+'?page=1&size=10', {headers: {"TOKEN": token}})
+          .then(res => {
+            console.log(res.data);
+            $scope.maxSize = res.data.parms.maxSize;
+            $scope.shops = res.data.parms.shops;
+          });
+      }
+    });
+
+    $scope.loadMore = () => {
+      $scope.stop = true;
+      $http.get(url + '/api/shop/getPickShop/'+$scope.province+'/'+$scope.city+'?page='+ $scope.currentPage +'&size=10', {headers: {"TOKEN": token}})
+        .then(res => {
+          console.log(res.data);
+          if (res.data.info == 1 && res.data.parms.shops.length > 0) {
+            $scope.shops = $scope.shops.concat(res.data.parms.shops);
+            $scope.currentPage++;
+            console.log($scope.curtentPage);
+            $scope.stop = false;
+          }
+
+        });
+    }
+
+    //利用两点经纬度计算距离
+    // function getDistance(lat1, lng1, lat2, lng2) {
+    //   var radLat1 = lat1 * Math.PI / 180.0;
+    //   var radLat2 = lat2 * Math.PI / 180.0;
+    //   var a = radLat1 - radLat2;
+    //   var b = lng1 * Math.PI / 180.0 - lng2 * Math.PI / 180.0;
+    //   var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+    //   s = s * 6378.137;
+    //   s = Math.round(s * 10000) / 10000;
+    //   return s * 1000
+    // };
+
+  }]);
+
   myApp.controller('blankPageCtr', ['$scope', 'locals', '$state', '$http', '$timeout', '$window', function ($scope, locals, $state, $http, $timeout, $window) {
     document.body.style.backgroundColor = '#ffffff';
     let token = getQueryString("token");
@@ -663,7 +802,7 @@
 
   }]);
 
-  myApp.controller('goodDetailCtr', ['$scope', 'locals', '$state', '$http', '$timeout', '$stateParams', function ($scope, locals, $state, $http, $timeout, $stateParams) {
+  myApp.controller('expressGoodCtr', ['$scope', 'locals', '$state', '$http', '$timeout','$stateParams', function ($scope, locals, $state, $http, $timeout,$stateParams) {
     document.body.style.backgroundColor = '#eeeeee';
     console.log($stateParams);
     let params = $stateParams;
@@ -674,25 +813,6 @@
     else {
       $scope.id = locals.get("goodDetailId")
     }
-
-    // wx.ready(function () {
-    //   wx.onMenuShareAppMessage({
-    //     title: '测试标题', // 分享标题
-    //     desc: '测试描述', // 分享描述
-    //     link: 'http://www.cookingeasy.cn/user/index.html#/goodDetail', // 分享链接，该链接域名必须与当前企业的可信域名一致
-    //     imgUrl: 'http://www.cookingeasy.cn/images/good/213/logo.jpg', // 分享图标
-    //     type: '', // 分享类型,music、video或link，不填默认为link
-    //     dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-    //     success: function () {
-    //       // 用户确认分享后执行的回调函数
-    //       console.log(111)
-    //     },
-    //     cancel: function () {
-    //       // 用户取消分享后执行的回调函数
-    //     }
-    //   });
-    // });
-
     let token = locals.get("token");
 
     $http.get(url + '/api/addr/find', {headers: {"TOKEN": token}})
@@ -786,6 +906,252 @@
     $(".payPic").click(function () {
       $(".mask").hide();
     });
+
+  }]);
+
+  myApp.controller('goodDetailCtr', ['$scope', 'locals', '$state', '$http', '$timeout', '$stateParams', function ($scope, locals, $state, $http, $timeout, $stateParams) {
+    document.body.style.backgroundColor = '#eeeeee';
+    let token1 = getQueryString("token");
+    console.log($stateParams);
+    let params = $stateParams;
+    if (params.id) {
+      locals.set("goodDetailId", params.id);
+      $scope.id = params.id;
+    }
+    else {
+      $scope.id = locals.get("goodDetailId")
+    }
+
+    if(token1){
+      locals.set("token",token1);
+      window.location.href = 'http://www.cookingeasy.cn/user/index.html#/goodDetail/'+$scope.id
+      // $http.get(url + '/api/addr/find', {headers: {"TOKEN": token1}})
+      //   .then(res => {
+      //     console.log(res.data);
+      //     if (res.data.info == 1) {
+      //       $scope.addresses = res.data.parms.addresses;
+      //       if (res.data.parms.addresses.length == 0) {
+      //         $scope.hasAddress = 0
+      //       }
+      //       else if (res.data.parms.addresses.length > 0) {
+      //         $scope.hasAddress = 1
+      //       }
+      //       console.log($scope.addresses);
+      //       console.log($scope.hasAddress);
+      //     }
+      //   });
+      //
+      // $http.get(url + '/api/integral/find/' + $scope.id, {headers: {"TOKEN": token1}})
+      //   .then(res => {
+      //     console.log(res.data);
+      //     if (res.data.info == 1) {
+      //       $scope.integralGood = res.data.parms.integralGood;
+      //       console.log($scope.integralGood);
+      //     }
+      //   });
+    }
+    else{
+      let token = locals.get("token");
+      $http.get(url + '/api/addr/find', {headers: {"TOKEN": token}})
+        .then(res => {
+          console.log(res.data);
+          if (res.data.info == 1) {
+            $scope.addresses = res.data.parms.addresses;
+            if (res.data.parms.addresses.length == 0) {
+              $scope.hasAddress = 0
+            }
+            else if (res.data.parms.addresses.length > 0) {
+              $scope.hasAddress = 1
+            }
+            console.log($scope.addresses);
+            console.log($scope.hasAddress);
+          }
+        });
+
+      $http.get(url + '/api/integral/find/' + $scope.id, {headers: {"TOKEN": token}})
+        .then(res => {
+          console.log(res.data);
+          if (res.data.info == 1) {
+            $scope.integralGood = res.data.parms.integralGood;
+            console.log($scope.integralGood);
+          }
+        });
+
+      $http.get(url + '/api/pc/getJS?url=http://www.cookingeasy.cn/user/index.html', {headers: {"TOKEN": token}})
+        .then(function (res) {
+          console.log(res.data);
+          let appdId = res.data.parms.appId;
+          let noncestr = res.data.parms.noncestr;
+          let signature = res.data.parms.signature;
+          let timestamp = res.data.parms.timestamp;
+          locals.set("appdId", appdId);
+          locals.set("noncestr", noncestr);
+          locals.set("signature", signature);
+          locals.set("timestamp", timestamp);
+          wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: appdId, // 必填，企业号的唯一标识，此处填写企业号corpid
+            timestamp: timestamp, // 必填，生成签名的时间戳
+            nonceStr: noncestr, // 必填，生成签名的随机串
+            signature: signature,// 必填，签名，见附录1
+            jsApiList: ['getLocation', 'scanQRCode', 'chooseWXPay','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+          });
+          wx.ready(function () {
+            console.log(222);
+            wx.getLocation({
+              type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+              success: function (res) {
+                console.log(res);
+                var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                console.log(latitude);
+                console.log(longitude);
+                $scope.latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                $scope.longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                locals.set("latitude",res.latitude);
+                locals.set("longitude",res.longitude);
+                var speed = res.speed; // 速度，以米/每秒计
+                var accuracy = res.accuracy; // 位置精度
+                console.log($scope.latitude);
+                console.log($scope.longitude);
+              }
+            });
+            wx.onMenuShareAppMessage({
+              title: $scope.integralGood.name, // 分享标题
+              desc: '兑换价格：￥'+$scope.integralGood.price/100+'+'+$scope.integralGood.integral+'积分', // 分享描述
+              link: 'http://www.cookingeasy.cn/user/index.html#/goodRedirect/'+$scope.id, // 分享链接，该链接域名必须与当前企业的可信域名一致
+              imgUrl: 'http://www.cookingeasy.cn/images/good/'+ $scope.id +'/logo.jpg', // 分享图标
+              type: '', // 分享类型,music、video或link，不填默认为link
+              dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+              success: function () {
+                // 用户确认分享后执行的回调函数
+                console.log(111)
+              },
+              cancel: function () {
+                // 用户取消分享后执行的回调函数
+              }
+            });
+            wx.onMenuShareTimeline({
+              title: $scope.integralGood.name, // 分享标题
+              link: 'http://www.cookingeasy.cn/user/index.html#/goodRedirect/'+$scope.id, // 分享链接，该链接域名必须与当前企业的可信域名一致
+              imgUrl: 'http://www.cookingeasy.cn/images/good/'+ $scope.id +'/logo.jpg', // 分享图标
+              type: '', // 分享类型,music、video或link，不填默认为link
+              dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+              success: function () {
+                // 用户确认分享后执行的回调函数
+                console.log(111)
+              },
+              cancel: function () {
+                // 用户取消分享后执行的回调函数
+              }
+            });
+          });
+          wx.error(function (res) {
+            console.log(res);
+          });
+        })
+        .catch(err => {
+          // alert('请求失败');
+          console.log(err);
+        });
+
+      // wx.ready(function () {
+      //   wx.onMenuShareAppMessage({
+      //     title: '易德菜', // 分享标题
+      //     desc: '这商品超赞的，你也来看看吧！', // 分享描述
+      //     link: 'http://www.cookingeasy.cn/user/index.html#/goodRedirect/'+$scope.id, // 分享链接，该链接域名必须与当前企业的可信域名一致
+      //     imgUrl: 'http://www.cookingeasy.cn/images/good/'+ $scope.id +'/logo.jpg', // 分享图标
+      //     type: '', // 分享类型,music、video或link，不填默认为link
+      //     dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+      //     success: function () {
+      //       // 用户确认分享后执行的回调函数
+      //       console.log(111)
+      //     },
+      //     cancel: function () {
+      //       // 用户取消分享后执行的回调函数
+      //     }
+      //   });
+      // });
+    }
+
+    $(".toPage1").click(function () {
+      $(".page1").show();
+      $(".page2").hide();
+      $(".page3").hide();
+      $(".weui-navbar").children().removeClass("weui-bar__item_on1");
+      $(this).addClass("weui-bar__item_on1")
+    });
+    $(".toPage2").click(function () {
+      $(".page1").hide();
+      $(".page2").show();
+      $(".page3").hide();
+      $(".weui-navbar").children().removeClass("weui-bar__item_on1");
+      $(this).addClass("weui-bar__item_on1")
+    });
+    $(".toPage3").click(function () {
+      $(".page1").hide();
+      $(".page2").hide();
+      $(".page3").show();
+      $(".weui-navbar").children().removeClass("weui-bar__item_on1");
+      $(this).addClass("weui-bar__item_on1")
+    });
+    $("#toExchange").click(function () {
+      if ($scope.hasAddress == 0) {
+        $.toast("缺少配送地址", "forbidden");
+      }
+      else {
+        weui.confirm('兑换该商品将扣除' + $scope.integralGood.integral + '积分，另需支付' + $scope.integralGood.price / 100 + '元，点击确定继续', {
+          title: '确定兑换？',
+          buttons: [{
+            label: '取消',
+            type: 'default',
+            onClick: function () {
+              console.log('no')
+            }
+          }, {
+            label: '确定',
+            type: 'primary',
+            onClick: function () {
+              // $(".mask").show();
+              // console.log($scope.integralGood.id);
+              // console.log($scope.addresses[0].name);
+              $http.post(url + '/api/order/newOrder0/' + $scope.integralGood.id, {
+                // goodId: $scope.integralGood.id,
+                name: $scope.addresses[0].name,
+                phone: $scope.addresses[0].phone,
+                province: $scope.addresses[0].province,
+                city: $scope.addresses[0].city,
+                district: $scope.addresses[0].district,
+                addr: $scope.addresses[0].addr
+              }, {headers: {"TOKEN": locals.get("token")}})
+                .then(res => {
+                  console.log(res.data);
+                  if (res.data.info == 1) {
+                    $scope.ExOrderId = res.data.parms.id;
+                    locals.set("ExOrderId", res.data.parms.id);
+                    window.location.href = 'http://www.cookingeasy.cn/user/exchange.html';
+                  }
+                });
+            }
+          }]
+        });
+      }
+    });
+    $(".payPic").click(function () {
+      $(".mask").hide();
+    });
+
+    $scope.toShop = () => {
+      window.location.href = 'http://www.cookingeasy.cn/user/index.html#/shop'
+    }
+
+    function getQueryString(name) {
+      let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+      let r = window.location.search.substr(1).match(reg);
+      if (r != null) return unescape(r[2]);
+      return null;
+    }
+
     // $scope.payNow = () => {
     //   console.log($("#x12").is(':checked'));
     //   console.log($("#x11").is(':checked'));
@@ -805,6 +1171,34 @@
     //   }
     //   // $state.go("exchangeSuccess")
     // }
+  }]);
+
+  myApp.controller('goodRedirectCtr', ['$scope', 'locals', '$state', '$http', '$timeout', '$window','$stateParams', function ($scope, locals, $state, $http, $timeout, $window,$stateParams) {
+    document.body.style.backgroundColor = '#ffffff';
+    console.log($stateParams);
+    let params = $stateParams;
+    let goodId = params.id;
+    //https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2d63fca66c12d30a&redirect_uri=https%3a%2f%2fwww.cookingeasy.cn%2fapi%2fpc%2frelate5&response_type=code&scope=snsapi_userinfo&state=304#wechat_redirect
+    window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2d63fca66c12d30a&redirect_uri=https%3a%2f%2fwww.cookingeasy.cn%2fapi%2fpc%2frelate5&response_type=code&scope=snsapi_userinfo&state="+goodId+"#wechat_redirect";
+
+    // let token = getQueryString("token");
+    // if (!token) {
+    //   $.alert({text: '系统异常'});
+    // }
+    // else if (token) {
+    //   // if (token) {
+    //   locals.set("token", token);
+    //   //todo 摆上服务器更改为:易德菜服务器地址
+    //   $window.location.href = "http://localhost:8083/cookingEasy/trunk/index.html#/main/goodDetail/"+goodId + '/' + true
+    //   // $window.location.href = "http://www.cookingeasy.cn/user/index.html#/goodDetail/"+goodId+'/'+ true
+    // }
+    //
+    function getQueryString(name) {
+      let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+      let r = window.location.search.substr(1).match(reg);
+      if (r != null) return unescape(r[2]);
+      return null;
+    }
   }]);
 
   myApp.controller('integrationCtr', ['$scope', 'locals', '$state', '$http', '$timeout', function ($scope, locals, $state, $http, $timeout) {
@@ -908,6 +1302,8 @@
               console.log(longitude);
               $scope.latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
               $scope.longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+              locals.set("latitude",res.latitude);
+              locals.set("longitude",res.longitude);
               var speed = res.speed; // 速度，以米/每秒计
               var accuracy = res.accuracy; // 位置精度
               console.log($scope.latitude);
@@ -1139,7 +1535,7 @@
         let firstType = res.data.parms.goodTypes[0].id;
         console.log(firstType);
 
-        $http.get(url + '/api/integral/findAll?page=1&size=6', {headers: {"TOKEN": token}})
+        $http.get(url + '/api/integral/findAll/3?page=1&size=6', {headers: {"TOKEN": token}})
           .then(res => {
             console.log(res.data);
             $scope.stop = false;
@@ -1198,14 +1594,14 @@
             console.log(data[0].id);
             $scope.dataId = data[0].id;
             $scope.typeId = $scope.dataId;
-            $http.get(url + '/api/goodtype/findAlligt/' + $scope.typeId + '?page=1&size=6', {headers: {"TOKEN": token}})
+            $http.get(url + '/api/goodtype/findAlligt/' + $scope.typeId + '/3?page=1&size=6', {headers: {"TOKEN": token}})
               .then(res => {
                 console.log(res.data);
                 $scope.integralGoods = res.data.parms.integralGoods;
                 $scope.maxSize = res.data.parms.maxSize;
               });
             // $("#trigger2").text("选择月份")
-            $http.get(url + '/api/goodtype/findAllType/' + $scope.dataId, {headers: {"TOKEN": token}})
+            $http.get(url + '/api/goodtype/getGoodTypeByPositionu/' + $scope.dataId, {headers: {"TOKEN": token}})
               .then(res => {
                 console.log(res.data);
                 $scope.level2 = res.data.parms.goodTypes;
@@ -1239,7 +1635,7 @@
         $scope.stop = false;
         $scope.typeId = data[0].id;
         if (data[0].id != -1) {
-          $http.get(url + '/api/goodtype/findAlligt/' + $scope.typeId + '?page=1&size=6', {headers: {"TOKEN": token}})
+          $http.get(url + '/api/goodtype/findAlligt/' + $scope.typeId + '/3?page=1&size=6', {headers: {"TOKEN": token}})
             .then(res => {
               console.log(res.data);
               $scope.integralGoods = res.data.parms.integralGoods;
@@ -1310,7 +1706,7 @@
       console.log(111);
       $scope.stop = true;
       if ($scope.typeId) {
-        $http.get(url + '/api/goodtype/findAlligt/' + $scope.typeId + '?page=' + $scope.curtentPage + '&size=6', {headers: {"TOKEN": token}})
+        $http.get(url + '/api/goodtype/findAlligt/' + $scope.typeId + '/3?page=' + $scope.curtentPage + '&size=6', {headers: {"TOKEN": token}})
           .then(res => {
             console.log(res.data);
             // console.log(res.data.parms.integralGoods.length);
@@ -1323,7 +1719,7 @@
           });
       }
       else if($scope.firstTime){
-        $http.get(url + '/api/integral/findAll?page=' + $scope.curtentPage + '&size=6', {headers: {"TOKEN": token}})
+        $http.get(url + '/api/integral/findAll/3?page=' + $scope.curtentPage + '&size=6', {headers: {"TOKEN": token}})
           .then(res => {
             console.log(res.data);
             if (res.data.info == 1 && res.data.parms.integralGoods.length > 0) {
@@ -1378,6 +1774,100 @@
     $scope.toPay = () => {
       $state.go("pay", {id: $scope.shopId})
     };
+  }]);
+
+  myApp.controller('takeGoodCtr', ['$scope', 'locals', '$state', '$http', '$timeout','$stateParams', function ($scope, locals, $state, $http, $timeout,$stateParams) {
+    document.body.style.backgroundColor = '#eeeeee';
+    let params = $stateParams;
+    console.log(params);
+    $scope.args = params.args;
+    if (params.id) {
+      locals.set("goodDetailId", params.id);
+      $scope.id = params.id;
+    }
+    else {
+      $scope.id = locals.get("goodDetailId")
+    }
+    let token = locals.get("token");
+
+    $http.get(url + '/api/addr/find', {headers: {"TOKEN": token}})
+      .then(res => {
+        console.log(res.data);
+        if (res.data.info == 1) {
+          $scope.addresses = res.data.parms.addresses;
+          if (res.data.parms.addresses.length == 0) {
+            $scope.hasAddress = 0
+          }
+          else if (res.data.parms.addresses.length > 0) {
+            $scope.hasAddress = 1
+          }
+          console.log($scope.addresses);
+          console.log($scope.hasAddress);
+        }
+      });
+
+    $http.get(url + '/api/integral/find/' + $scope.id, {headers: {"TOKEN": token}})
+      .then(res => {
+        console.log(res.data);
+        if (res.data.info == 1) {
+          $scope.integralGood = res.data.parms.integralGood;
+          console.log($scope.integralGood);
+        }
+      });
+
+    $(".toPage1").click(function () {
+      $(".page1").show();
+      $(".page2").hide();
+      $(".page3").hide();
+      $(".weui-navbar").children().removeClass("weui-bar__item_on1");
+      $(this).addClass("weui-bar__item_on1")
+    });
+    $(".toPage2").click(function () {
+      $(".page1").hide();
+      $(".page2").show();
+      $(".page3").hide();
+      $(".weui-navbar").children().removeClass("weui-bar__item_on1");
+      $(this).addClass("weui-bar__item_on1")
+    });
+    $(".toPage3").click(function () {
+      $(".page1").hide();
+      $(".page2").hide();
+      $(".page3").show();
+      $(".weui-navbar").children().removeClass("weui-bar__item_on1");
+      $(this).addClass("weui-bar__item_on1")
+    });
+    $("#toExchange").click(function () {
+        weui.confirm('兑换该商品将扣除' + $scope.integralGood.integral + '积分，另需支付' + $scope.integralGood.price / 100 + '元，点击确定继续', {
+          title: '确定兑换？',
+          buttons: [{
+            label: '取消',
+            type: 'default',
+            onClick: function () {
+              console.log('no')
+            }
+          }, {
+            label: '确定',
+            type: 'primary',
+            onClick: function () {
+              // $(".mask").show();
+              // console.log($scope.integralGood.id);
+              // console.log($scope.addresses[0].name);
+              $http.post(url + '/api/order/newOrder2/' + $scope.integralGood.id + '/' + $scope.args.shopId + '/' +$scope.args.phone + '/' +$scope.args.name, {}, {headers: {"TOKEN": token}})
+                .then(res => {
+                  console.log(res.data);
+                  if (res.data.info == 1) {
+                    $scope.ExOrderId = res.data.parms.id;
+                    locals.set("ExOrderId", res.data.parms.id);
+                    window.location.href = 'http://www.cookingeasy.cn/user/exchange.html';
+                  }
+                });
+            }
+          }]
+        });
+    });
+    $(".payPic").click(function () {
+      $(".mask").hide();
+    });
   }]);
 
   myApp.controller('verifyPhoneCtr', ['$scope', 'locals', '$state', '$http', '$timeout', function ($scope, locals, $state, $http, $timeout) {
@@ -1497,10 +1987,10 @@
       request: function (config) {
         config.requestTimestamp = new Date().getTime();
         let token = locals.get("token");
-        if (!token) {
-          $window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2d63fca66c12d30a&redirect_uri=http%3a%2f%2fwww.cookingeasy.cn%2fapi%2fpc%2frelate2&response_type=code&scope=snsapi_userinfo&state=0#wechat_redirect";
-          console.log('token null');
-        }
+        // if (!token) {
+        //   $window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2d63fca66c12d30a&redirect_uri=http%3a%2f%2fwww.cookingeasy.cn%2fapi%2fpc%2frelate2&response_type=code&scope=snsapi_userinfo&state=0#wechat_redirect";
+        //   console.log('token null');
+        // }
         return config;
       },
       response: function (response) {

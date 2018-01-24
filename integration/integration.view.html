@@ -9,7 +9,9 @@
   </div>
   <div>
     <div class="streamBox bgcWhite" ui-sref="integrationDetail({id:record.id})" ng-repeat="record in integralRecords">
-      <img src="images/cookingEasy.png" alt="" class="streamPic">
+      <!--<img src="images/cookingEasy.png" alt="" class="streamPic">-->
+        <img src="images/cookingEasy.png" alt="" class="streamPic" ng-show="!record.headImg">
+        <img ng-src="{{record.headImg}}" alt="" onerror="this.src='images/cookingEasy.png'" class="streamPic" ng-show="record.headImg">
       <div class="streamDes">
         <div class="desLeft">
           <!--<p class="color50 fs14" ng-show="record.inefaral >= 0">{{record.name}}-获取{{record.ratio}}%积分</p>-->
@@ -19,6 +21,7 @@
         </div>
         <div class="desRight fs24 mr10">
           <p class="color50 mt3" ng-show="record.inefaral < 0">{{record.inefaral}}</p>
+          <p class="color50 mt3" ng-show="record.inefaral == 0">0</p>
           <p class="color50 mt3" ng-show="record.inefaral > 0">+{{record.inefaral}}</p>
         </div>
       </div>

@@ -1,0 +1,45 @@
+<p class="pt10 pb10 pl10 color128">填写自提用户信息</p>
+<div class="weui-cell bgcWhite">
+    <div class="weui-cell__hd"><label for="city-picker" class="weui-label">姓名</label></div>
+    <div class="weui-cell__bd">
+        <input class="weui-input"  type="text" placeholder="请输入手机号码" ng-model="name">
+    </div>
+</div>
+<div class="weui-cell bgcWhite">
+    <div class="weui-cell__hd"><label for="city-picker" class="weui-label">手机号码</label></div>
+    <div class="weui-cell__bd">
+        <input class="weui-input"  type="text" placeholder="请输入手机号码" ng-model="phone">
+    </div>
+</div>
+<p class="pt10 pb10 pl10 color128">选择所在城市的自提点</p>
+<div class="weui-cell bgcWhite">
+    <div class="weui-cell__hd"><label for="city-picker" class="weui-label">城市</label></div>
+    <div class="weui-cell__bd">
+        <input class="weui-input" id="city-picker" type="text" readonly="" data-code="110000" data-codes="110000,110000" placeholder="请选择城市">
+    </div>
+</div>
+<div class="mt10">
+    <p class="tac" ng-show="nearby == 1">附近的自提点</p>
+    <p class="tac" ng-show="nearby == 0">附近没有自提点，请手动选择</p>
+    <div class="weui-cell bgcWhite" ng-repeat="shop in shops" infinite-scroll="loadMore()" infinite-scroll-distance="0"
+         infinite-scroll-immediate-check='false' infinite-scroll-disabled='stop'>
+        <div class="weui-cell__hd">
+            <img ng-src="http://www.cookingeasy.cn/images/shop/{{shop.id}}/logo.jpg" alt="" onerror="this.src='images/default.png'" style="width: 70px;height: 70px;">
+        </div>
+        <div class="weui-cell__bd ml10">
+            <p>
+                <span class="selfSupport">自营</span>
+                <span class="selfPick" ng-show="shop.pickUpSite">自提点</span>
+                <span class="shopName pl3">{{shop.username}}</span>
+            </p>
+            <p class="shopDistance">{{shop.district}}{{shop.addr}}</p>
+        </div>
+        <div class="weui-cell__ft">
+            <!--ui-sref="takeGood({args:{id:id,province:province,city:city,distinct:shop.district,addr:shop.addr,shopId:shop.id,username:shop.username}})"-->
+            <button class="weui-btn weui-btn_mini greenBtn" ng-click="takeShop(shop,$event)" style="background-color: rgb(24,186,101);color: #ffffff;">使用</button>
+        </div>
+    </div>
+</div>
+<div class="tac fs16" ng-show="maxSize == 0">
+    该城市没有自提点！
+</div>

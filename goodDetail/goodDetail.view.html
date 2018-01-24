@@ -36,11 +36,11 @@
         <!--<img src="images/replace.png" alt="" class="panelPic">-->
       <!--</div>-->
     </div>
-    <div class="page2 fs13 color50 mt10" style="display:none;padding-bottom: 110px;">
+    <div class="page2 fs13 color50 mt10" style="display:none;padding-bottom: 80px;">
       <p class="pl10 pr10">1、用户确认符合活动条件后，点击[马上兑换]，并填写配送信息。</p>
       <p class="pl10 pr10">2、确认信息无误，提交兑换。</p>
     </div>
-    <div class="page3 fs13 color50 mt10" style="display:none;padding-bottom: 110px;">
+    <div class="page3 fs13 color50 mt10" style="display:none;padding-bottom: 80px;">
       <p class="pl10 pr10">1、配送区域：仅限中国大陆地区(港澳台、西藏、新疆等地除外)</p>
       <p class="pl10 pr10">2、每位用户仅可兑换一次。</p>
       <p class="pl10 pr10">3、易德菜将在5个工作日内邮寄奖品。</p>
@@ -49,19 +49,30 @@
       <p class="pl10 pr10">6、商品兑换后无法退货、退款等。</p>
     </div>
   </div>
-</div>
+</div>2
 <div class="fixBox">
-  <div class="weui-cell fs13" ui-sref="address">
-    <div class="weui-cell__hd">
-      <label class="weui-label w90">配送地址</label>
-    </div>
-    <div class="weui-cell__bt">
-      <!--<input class="weui-input" type="text" placeholder="请填写">-->
-      <span ng-show="hasAddress == 0" ui-sref="address" class="color128">请填写</span>
-      <span ng-show="hasAddress == 1" class="color50">{{addresses[0].province}}{{addresses[0].city}}{{addresses[0].district}}{{addresses[0].addr}}</span>
-    </div>
+  <p class="tac" style="padding-top: 5px;padding-bottom: 5px;">配送方式</p>
+  <div class="overFlowHid">
+      <button class="weui-btn greenBtn fl" style="background-color: rgb(24,186,101);color: #ffffff;width: 49%;font-size: 16px;" ui-sref="expressGood({id:id})" ng-show="integralGood.type != 1">快递</button>
+    <button class="weui-btn fl" style="background-color: #ccc;color: #ffffff;width: 49%;font-size: 16px;margin-top: 0;" ui-sref="expressGood({id:id})" ng-show="integralGood.type == 1" disabled>快递不可用</button>
+      <button class="weui-btn greenBtn fr" style="width: 49%;margin-top: 0;background-color: rgb(24,186,101);color: #ffffff;font-size: 16px;" ui-sref="chooseTake({id:id})" ng-show="integralGood.type != 2">自提</button>
+      <button class="weui-btn fl" style="background-color: #ccc;color: #ffffff;width: 49%;font-size: 16px;margin-top: 0;" ui-sref="expressGood({id:id})" ng-show="integralGood.type == 2" disabled>自提不可用</button>
   </div>
-  <button class="weui-btn bottomBtn" id="toExchange">马上兑换</button>
+  <!--<div class="weui-cell fs13" ui-sref="address">-->
+    <!--<div class="weui-cell__hd">-->
+      <!--<label class="weui-label w90">配送地址</label>-->
+    <!--</div>-->
+    <!--<div class="weui-cell__bt">-->
+      <!--&lt;!&ndash;<input class="weui-input" type="text" placeholder="请填写">&ndash;&gt;-->
+      <!--<span ng-show="hasAddress == 0" ui-sref="address" class="color128">请填写</span>-->
+      <!--<span ng-show="hasAddress == 1" class="color50">{{addresses[0].province}}{{addresses[0].city}}{{addresses[0].district}}{{addresses[0].addr}}</span>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<button class="weui-btn bottomBtn" id="toExchange">马上兑换</button>-->
+  <!--<button class="weui-btn greenBtn" id="toExchange">马上兑换</button>-->
+</div>
+<div class="shoppingCartBox" ng-click="toShop()" style="right: 10px;bottom: 90px;z-index: 1001;">
+    <img src="images/shoppingCart.png" alt="">
 </div>
 <!--<div class="mask">-->
   <!--<div class="fixBoxPay">-->

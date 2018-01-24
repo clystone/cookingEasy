@@ -59,7 +59,11 @@
   <div class="shopList" ng-repeat="shop in json1" ui-sref="shopDetail({id:shop.id})">
     <img ng-src="http://www.cookingeasy.cn/images/shop/{{shop.id}}/logo.jpg" alt="" onerror="this.src='images/default.png'" >
     <div class="shopDes">
-      <p><span class="selfSupport">自营</span><span class="shopName pl3">{{shop.username}}</span></p>
+      <p>
+        <span class="selfSupport">自营</span>
+        <span class="selfPick" ng-show="shop.pickUpSite">自提点</span>
+        <span class="shopName pl3">{{shop.username}}</span>
+      </p>
       <p class="shopDistance">{{shop.addr}} <span>{{shop.howFar}}m</span></p>
       <p class="shopDiscount">&nbsp;</p>
     </div>

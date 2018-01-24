@@ -1,0 +1,70 @@
+<div class="exchangeDetailTop bgcWhite">
+    <img ng-src="http://www.cookingeasy.cn/images/good/{{id}}/logo.jpg" onerror="this.src='images/default.png'" alt="" class="exchangeTopPic">
+</div>
+<div class="exchangeDetailMid bgcWhite mb10 overFlowHid">
+    <div class="fl midLeft">
+        <p class="fw700 fs16 color50 pt10">{{integralGood.name}}</p>
+        <p class="color153 fs13">零售价 ￥ {{integralGood.retailPrice/100}}</p>
+    </div>
+    <div class="fr midRight tac">
+        <p class="mt10 rightTop mr10 ml10">￥{{integralGood.price/100}}</p>
+        <p class="rightBot mr10 ml10 fs12 mb15">+{{integralGood.integral}}积分兑换</p>
+    </div>
+
+</div>
+<div class="weui-tab mt10">
+    <div class="weui-navbar">
+        <div class="weui-navbar__item weui-bar__item_on1 toPage1">
+            商品简介
+        </div>
+        <div class="weui-navbar__item toPage2">
+            兑换流程
+        </div>
+        <div class="weui-navbar__item toPage3">
+            注意事项
+        </div>
+    </div>
+    <div class="weui-tab__panel bgcWhite">
+        <div class="page1 mt10">
+            <div class="goodDetailPicBox">
+                <img ng-src="http://www.cookingeasy.cn/images/good/{{id}}/presentation.jpg" onerror="this.src='images/default.png'" alt="" class="panelPic">
+            </div>
+            <!--<div  class="goodDetailPicBox">-->
+            <!--<img src="images/replace.png" alt="" class="panelPic">-->
+            <!--</div>-->
+            <!--<div  class="goodDetailPicBox">-->
+            <!--<img src="images/replace.png" alt="" class="panelPic">-->
+            <!--</div>-->
+        </div>
+        <div class="page2 fs13 color50 mt10" style="display:none;padding-bottom: 110px;">
+            <p class="pl10 pr10">1、用户确认符合活动条件后，点击[马上兑换]，并填写配送信息。</p>
+            <p class="pl10 pr10">2、确认信息无误，提交兑换。</p>
+        </div>
+        <div class="page3 fs13 color50 mt10" style="display:none;padding-bottom: 110px;">
+            <p class="pl10 pr10">1、配送区域：仅限中国大陆地区(港澳台、西藏、新疆等地除外)</p>
+            <p class="pl10 pr10">2、每位用户仅可兑换一次。</p>
+            <p class="pl10 pr10">3、易德菜将在5个工作日内邮寄奖品。</p>
+            <p class="pl10 pr10">4、请提供正确并可正常通信的手机号，提供错误信息导致损失将由用户承担。</p>
+            <p class="pl10 pr10">5、产品邮费由易德菜承担。</p>
+            <p class="pl10 pr10">6、商品兑换后无法退货、退款等。</p>
+        </div>
+    </div>
+</div>
+<div class="fixBox">
+    <!--<p class="tac">配送方式</p>-->
+    <!--<div class="overFlowHid">-->
+    <!--<button class="weui-btn weui-btn_mini greenBtn fl ml20 mb10">快递</button>-->
+    <!--<button class="weui-btn weui-btn_mini greenBtn fr mr20 mb10" style="margin-top: 0;">自提</button>-->
+    <!--</div>-->
+    <div class="weui-cell fs13">
+        <div class="weui-cell__hd">
+            <label class="weui-label w90">自提地址</label>
+        </div>
+        <div class="weui-cell__bt">
+            <!--<input class="weui-input" type="text" placeholder="请填写">-->
+            <span class="color50">{{args.province}}{{args.city}}{{args.district}}{{args.addr}}{{args.username}}</span>
+        </div>
+    </div>
+    <button class="weui-btn bottomBtn" id="toExchange">马上兑换</button>
+    <!--<button class="weui-btn greenBtn" id="toExchange">马上兑换</button>-->
+</div>

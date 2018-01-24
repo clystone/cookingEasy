@@ -8,7 +8,8 @@
     <p class="exchangeDesRight"><span class="colorOrange">￥{{parms.integralGood.price / 100}}+{{parms.integralGood.integral}}积分</span><span class="color128 pl10 ts">￥{{parms.integralGood.retailPrice / 100}}</span></p>
   </div>
   <div class="mt5">
-    <span class="exchangeDesLeft">配送地址</span>
+    <span class="exchangeDesLeft" ng-show="parms.order.sendType != 1">配送地址</span>
+    <span class="exchangeDesLeft" ng-show="parms.order.sendType == 1">自提地址</span>
     <p class="exchangeDesRight"><span class="">{{parms.order.province}}{{parms.order.city}}{{parms.order.district}}{{parms.order.addr}}</span></p>
   </div>
   <div class="mt5">

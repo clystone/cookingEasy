@@ -35,7 +35,7 @@
 }
 
 .goodDetailPicBox:last-child{
-    padding-bottom: 110px;
+    padding-bottom: 80px;
 }
 
 .midLeft{
@@ -115,3 +115,17 @@ button.specialBottomBtn{
 .weui-dialog, .weui-toast{
     visibility: visible;
 }
+
+.greenBtn{
+    background-color: rgb(24,186,101);
+    color: #ffffff;
+}
+
+.ml20{
+    margin-left: 20px;
+}
+
+.mr20{
+    margin-right: 20px;
+}
+
